@@ -8,14 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Platform",
+"language": "GDScript",
+"path": "res://scripts/platform.gd"
+}, {
+"base": "Node2D",
+"class": "Wall",
+"language": "GDScript",
+"path": "res://scripts/wall.gd"
+} ]
 _global_script_class_icons={
-
+"Platform": "",
+"Wall": ""
 }
 
 [application]
 
 config/name="schafoom"
+run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
 
 [rendering]
