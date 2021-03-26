@@ -2,6 +2,17 @@ extends KinematicBody2D
 
 class_name Platform
 
+var tilesets = [{
+	"path": "res://tilesets/Down.tres",
+	"tile_size": Vector2(140, 140)
+}, {
+	"path": "res://tilesets/Middle.tres",
+	"tile_size": Vector2(140, 60),
+}, {
+	"path": "res://tilesets/Up.tres",
+	"tile_size": Vector2(42, 36),
+}]
+
 var velocity = Vector2(0, 0)
 var size = Vector2(0, 0)
 var y: float

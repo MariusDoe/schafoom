@@ -1,7 +1,7 @@
 extends Node2D
 
 var platform_height = 40
-var wall_height = 50
+var wall_height = 170
 
 var platform_min_distance: float
 
@@ -47,8 +47,11 @@ func get_screen_size() -> Vector2:
 
 func spawn_walls() -> void:
 	var height = get_screen_size().y
-	top_wall = spawn_wall(-height / 2)
-	bot_wall = spawn_wall(+height / 2)
+	top_wall = spawn_wall(-height / 2 + wall_height / 2)
+	top_wall.set_texture(preload("res://assets/Middle/Ceiling/Ceiling.png"))
+	bot_wall = spawn_wall(+height / 2 - wall_height / 2)
+	bot_wall.set_texture(preload("res://assets/Middle/Ground/Ground.png"))
+	
 
 func spawn_player() -> Player:
 	var player = PlayerScn.instance()
@@ -78,7 +81,7 @@ func is_platform_rect_ok(rect: Rect2) -> bool:
 func create_new_platform_rect() -> Rect2:
 	var screen_size = get_screen_size()
 	var width = get_platform_width()
-	var spread = (screen_size.y - wall_height - platform_height) / 2
+	var spread = (screen_size.y - platform_height) / 2 - wall_height
 	var spread_top = spread - platform_min_distance
 	var spread_bot = spread
 	var y = rand_range(-spread_top, spread_bot)
@@ -107,3 +110,7 @@ func _input(event: InputEvent) -> void:
 			player.jump_trigger()
 		if event.is_action_released("jump"):
 			player.jump_release()
+			
+func spawn_background():
+	var background = preload("res://scenes/Background.tscn").instance()
+	$camera.add_child(background)
