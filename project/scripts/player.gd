@@ -10,10 +10,15 @@ var jump_max_time = 0.25
 var velocity = Vector2(0, 0)
 var jump_cooldown = 0.0
 
+var pushed: bool
+var cached_can_jump: bool
+
 func _physics_process(delta: float):
 	apply_jump_velocity(delta)
 	add_gravity(delta)
 	move_and_slide(velocity)
+	reset_velocity_on_collision()
+	pushed = false
 
 func jump_trigger() -> void:
 	if not can_jump():
@@ -25,6 +30,8 @@ func jump_release() -> void:
 	jump_cooldown = 0.0
 
 func can_jump() -> bool:
+	if pushed:
+		return cached_can_jump
 	return is_on_floor() or is_on_wall()
 
 func add_gravity(delta: float) -> void:
@@ -36,3 +43,16 @@ func apply_jump_velocity(delta: float) -> void:
 		return
 	if velocity.y < 0.0:
 		velocity.y *= exp(-velocity_reduction_factor * delta)
+
+func get_pushed(velocity: Vector2) -> void:
+	pushed = false
+	cached_can_jump = can_jump()
+	move_and_slide(velocity)
+	pushed = true
+
+func reset_velocity_on_collision() -> void:
+	if is_on_floor() or is_on_ceiling():
+		velocity.y = 0
+
+func get_size() -> Vector2:
+	return $shape.shape.extents * 2

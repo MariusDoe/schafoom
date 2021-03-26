@@ -3,6 +3,8 @@ extends Node2D
 var platform_height = 40
 var wall_height = 50
 
+var platform_min_distance: float
+
 var WallScn = preload("res://scenes/wall.tscn")
 var PlatformScn = preload("res://scenes/platform.tscn")
 var PlayerScn = preload("res://scenes/player.tscn")
@@ -10,11 +12,18 @@ var PlayerScn = preload("res://scenes/player.tscn")
 var top_wall: Wall
 var bot_wall: Wall
 var player: Player
+var platforms = []
 
 func _ready() -> void:
+	randomize()
 	$camera.make_current()
 	spawn_walls()
 	player = spawn_player()
+	platform_min_distance = player.get_size().y
+
+func _physics_process(delta) -> void:
+	set_platform_velocities(delta)
+	spawn_platforms()
 
 func spawn_platform(pos: Vector2, width: float) -> Platform:
 	var platform = PlatformScn.instance()
@@ -46,6 +55,49 @@ func spawn_player() -> Player:
 	player.position = Vector2(0, 0)
 	$camera.add_child(player)
 	return player
+
+func get_current_velocity() -> Vector2:
+	return Vector2(-100, 0)
+
+func set_platform_velocities(delta: float) -> void:
+	var velocity = get_current_velocity()
+	for platform in platforms:
+		platform.set_velocity(velocity)
+
+func get_platform_width() -> float:
+	return rand_range(100, 500)
+
+func is_platform_rect_ok(rect: Rect2) -> bool:
+	for platform in platforms:
+		var platform_rect = platform.get_rect()
+		platform_rect = platform_rect.grow(platform_min_distance)
+		if rect.intersects(platform_rect):
+			return false
+	return true
+
+func create_new_platform_rect() -> Rect2:
+	var screen_size = get_screen_size()
+	var width = get_platform_width()
+	var spread = (screen_size.y - wall_height - platform_height) / 2
+	var y = rand_range(-spread, spread)
+	var x = (screen_size.x + width) / 2
+	var rect = Rect2(x, y, width, platform_height)
+	return rect
+
+func create_new_platform() -> void:
+	for try in range(5):
+		var rect = create_new_platform_rect()
+		if not is_platform_rect_ok(rect):
+			continue
+		var platform = spawn_platform(rect.position, rect.size.x)
+		platforms.push_back(platform)
+		print("spawned")
+		return
+	print("failed")
+
+func spawn_platforms() -> void:
+	if randf() < 0.01:
+		create_new_platform()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
