@@ -4,13 +4,16 @@ class_name Platform
 
 var velocity = Vector2(0, 0)
 var size = Vector2(0, 0)
+var y: float
 
 func _ready() -> void:
 	$shape.shape = $shape.shape.duplicate()
+	y = position.y
 
 func _physics_process(delta) -> void:
 	move_and_slide(velocity)
 	handle_push_player()
+	position.y = y
 
 func set_size(new_size: Vector2) -> void:
 	size = new_size

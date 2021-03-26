@@ -11,7 +11,6 @@ var velocity = Vector2(0, 0)
 var jump_cooldown = 0.0
 
 var pushed: bool
-var cached_can_jump: bool
 
 func _physics_process(delta: float):
 	apply_jump_velocity(delta)
@@ -31,7 +30,7 @@ func jump_release() -> void:
 
 func can_jump() -> bool:
 	if pushed:
-		return cached_can_jump
+		return true
 	return is_on_wall()
 
 func add_gravity(delta: float) -> void:
@@ -45,8 +44,6 @@ func apply_jump_velocity(delta: float) -> void:
 		velocity.y *= exp(-velocity_reduction_factor * delta)
 
 func get_pushed(velocity: Vector2) -> void:
-	pushed = false
-	cached_can_jump = can_jump()
 	move_and_slide(velocity)
 	pushed = true
 
