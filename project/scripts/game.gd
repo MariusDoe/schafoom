@@ -93,9 +93,7 @@ func create_new_platform() -> void:
 			continue
 		var platform = spawn_platform(rect.position, rect.size.x)
 		platforms.push_back(platform)
-		print("spawned")
 		return
-	print("failed")
 
 func spawn_platforms() -> void:
 	if randf() < 0.01:

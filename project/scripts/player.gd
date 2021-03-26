@@ -10,7 +10,13 @@ var jump_max_time = 0.25
 var velocity = Vector2(0, 0)
 var jump_cooldown = 0.0
 
+var dash_curve_down: Curve
+var dash_curve_up: Curve
+
 var pushed: bool
+
+func _ready() -> void:
+	create_dash_curves()
 
 func _physics_process(delta: float):
 	apply_jump_velocity(delta)
@@ -53,3 +59,13 @@ func reset_velocity_on_collision() -> void:
 
 func get_size() -> Vector2:
 	return $shape.shape.extents * 2
+
+func create_dash_curves():
+	dash_curve_up = Curve.new()
+	dash_curve_up.add_point(Vector2(0, 0), 0, 0)
+	dash_curve_up.add_point(Vector2(1, 100), 200, 200)
+	
+	dash_curve_down = Curve.new()
+	dash_curve_down.add_point(Vector2(0, 0), 0, 0)
+	dash_curve_down.add_point(Vector2(0.35, 20), 0, 0)
+	dash_curve_down.add_point(Vector2(1, -100), -300, -300)
