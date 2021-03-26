@@ -79,7 +79,9 @@ func create_new_platform_rect() -> Rect2:
 	var screen_size = get_screen_size()
 	var width = get_platform_width()
 	var spread = (screen_size.y - wall_height - platform_height) / 2
-	var y = rand_range(-spread, spread)
+	var spread_top = spread - platform_min_distance
+	var spread_bot = spread
+	var y = rand_range(-spread_top, spread_bot)
 	var x = (screen_size.x + width) / 2
 	var rect = Rect2(x, y, width, platform_height)
 	return rect

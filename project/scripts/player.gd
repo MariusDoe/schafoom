@@ -32,7 +32,7 @@ func jump_release() -> void:
 func can_jump() -> bool:
 	if pushed:
 		return cached_can_jump
-	return is_on_floor() or is_on_wall()
+	return is_on_wall()
 
 func add_gravity(delta: float) -> void:
 	velocity += gravity * delta
@@ -51,7 +51,7 @@ func get_pushed(velocity: Vector2) -> void:
 	pushed = true
 
 func reset_velocity_on_collision() -> void:
-	if is_on_floor() or is_on_ceiling():
+	if is_on_wall():
 		velocity.y = 0
 
 func get_size() -> Vector2:
