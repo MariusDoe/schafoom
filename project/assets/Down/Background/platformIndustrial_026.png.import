@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sheep(1).png-8bffd45448ac575138e62232f3dce7d7.stex"
+path="res://.import/platformIndustrial_026.png-701d3b443fdc943c0953e9c37db4b7aa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sheep(1).png"
-dest_files=[ "res://.import/Sheep(1).png-8bffd45448ac575138e62232f3dce7d7.stex" ]
+source_file="res://assets/Down/Background/platformIndustrial_026.png"
+dest_files=[ "res://.import/platformIndustrial_026.png-701d3b443fdc943c0953e9c37db4b7aa.stex" ]
 
 [params]
 

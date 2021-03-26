@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sheep(2).png-de914ef291266ff73c6aea9ceb47b1fb.stex"
+path="res://.import/Bridge.png-f5ea0f9fe257d488bb04d07bd589d2fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sheep(2).png"
-dest_files=[ "res://.import/Sheep(2).png-de914ef291266ff73c6aea9ceb47b1fb.stex" ]
+source_file="res://assets/Up/Plattform/Bridge.png"
+dest_files=[ "res://.import/Bridge.png-f5ea0f9fe257d488bb04d07bd589d2fe.stex" ]
 
 [params]
 

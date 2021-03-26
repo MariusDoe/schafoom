@@ -36,6 +36,13 @@ config/name="schafoom"
 run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/resizable=false
+window/size/borderless=true
+
 [input]
 
 jump={
