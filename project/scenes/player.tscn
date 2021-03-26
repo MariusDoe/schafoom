@@ -6,12 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64, 64 )
 
-[node name="player" type="Node2D"]
+[node name="player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
-[node name="body" type="RigidBody2D" parent="."]
-
-[node name="shape" type="CollisionShape2D" parent="body"]
+[node name="shape" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="sprite" type="Sprite" parent="."]
