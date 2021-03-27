@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/GUI/EndScreen/Background.png" type="Texture" id=1]
+[ext_resource path="res://assets/GUI/EndScreen/shadedDark45.png" type="Texture" id=2]
+[ext_resource path="res://assets/GUI/EndScreen/shadedDark46.png" type="Texture" id=3]
+
+[node name="Game_Over" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Background"]
+margin_left = 1016.69
+margin_top = 530.986
+margin_right = 1056.69
+margin_bottom = 544.986
+
+[node name="LineEdit" type="LineEdit" parent="Background"]
+margin_left = 1023.99
+margin_top = 673.059
+margin_right = 1081.99
+margin_bottom = 697.059
+
+[node name="TextureButton" type="TextureButton" parent="Background"]
+margin_left = 1325.48
+margin_top = 644.485
+margin_right = 1405.48
+margin_bottom = 724.485
+texture_normal = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton2" type="TextureButton" parent="Background"]
+margin_left = 1177.85
+margin_top = 784.176
+margin_right = 1257.85
+margin_bottom = 864.176
+texture_normal = ExtResource( 3 )

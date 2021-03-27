@@ -5,6 +5,7 @@ extends Node
 # var a = 2
 # var b = "text"
 export var spawn_robot = false
+export var walking = false
 onready var robot_anim = $Monitor1/MonitorContent/Zoom/Robot/AnimationPlayer
 var already_played = false
 
@@ -18,3 +19,6 @@ func _process(_delta):
 	if spawn_robot and not already_played:
 		robot_anim.play("creation")
 		already_played = true
+		
+	if walking:
+		robot_anim.play("walking")
