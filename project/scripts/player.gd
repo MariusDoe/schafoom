@@ -19,6 +19,8 @@ var dash_curve_up: Curve
 
 var pushed: bool
 
+var apparent_velocity: Vector2
+
 enum Direction {
 	UP,
 	DOWN,
@@ -117,13 +119,17 @@ func perform_dash(delta: float) -> void:
 		dashing = false
 		emit_signal("done_dashing")
 		return
-	dash_time += delta
 	var curve = get_dash_curve()
 	var t = dash_time / dash_duration
-	var height = dash_start_y + curve.interpolate(t)
-	print(height)
-	var offset = height - position.y
+	var old_height = position.y
+	var new_height = dash_start_y + curve.interpolate(t)
+	var distance = apparent_velocity.x * delta
+	var offset = new_height - old_height
+	var tangent = offset / distance
+	var angle = atan(tangent)
+	$sprite.rotation = angle
 	var collision = move_and_collide(Vector2(0, offset))
 	if collision:
 		var collider = collision.collider
 		emit_signal("destroy", collider)
+	dash_time += delta

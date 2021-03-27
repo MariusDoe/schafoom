@@ -50,7 +50,8 @@ func _ready() -> void:
 	platform_min_distance = player.get_size()
 
 func _physics_process(delta) -> void:
-	set_platform_velocities(delta)
+	set_platform_velocities()
+	set_player_apparent_velocity()
 	spawn_platforms()
 	move_background(delta)
 	move_walls(delta)
@@ -106,10 +107,14 @@ func spawn_player() -> Player:
 func get_current_velocity() -> Vector2:
 	return Vector2(-100, 0)
 
-func set_platform_velocities(delta: float) -> void:
+func set_platform_velocities() -> void:
 	var velocity = get_current_velocity()
 	for platform in platforms:
 		platform.set_velocity(velocity)
+
+func set_player_apparent_velocity() -> void:
+	var velocity = get_current_velocity()
+	player.apparent_velocity = -velocity
 
 func get_platform_width() -> float:
 	return rand_range(100, 500)
@@ -142,7 +147,7 @@ func adjust_platform_rect(rect: Rect2) -> Rect2:
 	var temp_platform = PlatformScn.instance()
 	rect.size = temp_platform.calc_size(rect.size)
 	temp_platform.queue_free()
-	rect.position.x += (old_size.x - rect.size) / 2
+	rect.position.x += (old_size.x - rect.size.x) / 2
 	return rect
 
 func create_new_platform() -> void:
