@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 class_name Player
 
-var gravity = Vector2(0, 600)
+var gravity = Vector2(0, 800)
 var jump_velocity = Vector2(0, -1000)
 var velocity_reduction_factor = 10.0
 var jump_max_time = 0.25

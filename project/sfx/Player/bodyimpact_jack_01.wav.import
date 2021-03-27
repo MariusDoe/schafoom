@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bodyimpact_jack_01.wav-44967c08f202b37f82f9dca27c7cb67e.sample"
+
+[deps]
+
+source_file="res://sfx/Player/bodyimpact_jack_01.wav"
+dest_files=[ "res://.import/bodyimpact_jack_01.wav-44967c08f202b37f82f9dca27c7cb67e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -6,6 +6,7 @@ var background_move_factor = 0.5
 
 var platform_min_distance: Vector2
 
+var PotatoScn = preload("res://scenes/Potato.tscn")
 var WallScn = preload("res://scenes/wall.tscn")
 var PlatformScn = preload("res://scenes/platform.tscn")
 var PlayerScn = preload("res://scenes/player.tscn")
@@ -59,6 +60,10 @@ func spawn_platform(pos: Vector2, width: float) -> Platform:
 	platform.set_size(Vector2(width, platform_height))
 	platform.position = pos
 	$center.add_child(platform)
+	var potato = spawn_potato(platform)
+	var offset_y = (platform_height + potato.get_size().y) / 2
+	var offset = Vector2(0, -offset_y)
+	potato.position = offset
 	return platform
 
 func spawn_wall(y: float) -> Wall:
@@ -215,9 +220,14 @@ func switch_level(direction: int) -> void:
 			new_level += 1
 		Player.Direction.DOWN:
 			new_level -= 1
-	
+
 	Globals.level = new_level
 	get_tree().change_scene("res://scenes/game.tscn")
 
 func _on_done_dashing() -> void:
 	switch_level(player.dash_direction)
+
+func spawn_potato(platform: Platform) -> Potato:
+	var potato = PotatoScn.instance()
+	platform.add_child(potato)
+	return potato
