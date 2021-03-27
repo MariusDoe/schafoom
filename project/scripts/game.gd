@@ -39,7 +39,7 @@ func spawn_wall(y: float) -> Wall:
 	wall.position = Vector2(0, y)
 	$camera.add_child(wall)
 	return wall
-	
+
 func get_screen_size() -> Vector2:
 	var viewport = get_viewport()
 	var rect = viewport.get_visible_rect().size * $camera.zoom
@@ -51,7 +51,7 @@ func spawn_walls() -> void:
 	top_wall.set_texture(preload("res://assets/Middle/Ceiling/Ceiling.png"))
 	bot_wall = spawn_wall(+height / 2 - wall_height / 2)
 	bot_wall.set_texture(preload("res://assets/Middle/Ground/Ground.png"))
-	
+
 
 func spawn_player() -> Player:
 	var player = PlayerScn.instance()
@@ -88,11 +88,11 @@ func create_new_platform_rect() -> Rect2:
 	var x = (screen_size.x + width) / 2
 	var pos = Vector2(x, y)
 	var size = Vector2(width, platform_height)
-	
+
 	var temp_platform = PlatformScn.instance()
 	size = temp_platform.calc_size(size)
 	temp_platform.queue_free()
-	
+
 	var rect = Rect2(pos, size)
 	return rect
 
@@ -115,7 +115,6 @@ func _input(event: InputEvent) -> void:
 			player.jump_trigger()
 		if event.is_action_released("jump"):
 			player.jump_release()
-			
+
 func spawn_background():
-	var background = preload("res://scenes/Background_Middle.tscn").instance()
-	$camera.add_child(background)
+	pass
