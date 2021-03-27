@@ -14,7 +14,8 @@
 
 (Marius)
 - dash checking (distance, potato, on-ground)
-- dash rotation / animation / ...
+
+- fix platform explosion texture bug
 
 - potato spawning
 - platform spawning improvements
