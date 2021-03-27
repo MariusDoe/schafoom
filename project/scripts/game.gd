@@ -2,6 +2,7 @@ extends Node2D
 
 var platform_height = 40
 var wall_height: float
+var background_move_factor = 0.5
 
 var platform_min_distance: Vector2
 
@@ -25,28 +26,40 @@ var walls = [{
 	"height": 187
 }]
 
+var backgrounds = [{
+	"path": "res://scenes/Background_Down.tscn"
+}, {
+	"path": "res://scenes/Background_Middle.tscn"
+}, {
+	"path": "res://scenes/Background_UP.tscn"
+}]
+
 var top_wall: Wall
 var bot_wall: Wall
 var player: Player
 var platforms = []
+var background: Node2D
 
 func _ready() -> void:
 	randomize()
-	$camera.make_current()
+	$center.position = get_screen_size() / 2
 	spawn_walls()
+	spawn_background()
 	player = spawn_player()
 	platform_min_distance = player.get_size()
-	print(platform_min_distance)
 
 func _physics_process(delta) -> void:
 	set_platform_velocities(delta)
 	spawn_platforms()
+	move_background(delta)
+	move_walls(delta)
+	
 
 func spawn_platform(pos: Vector2, width: float) -> Platform:
 	var platform = PlatformScn.instance()
 	platform.set_size(Vector2(width, platform_height))
 	platform.position = pos
-	$camera.add_child(platform)
+	$center.add_child(platform)
 	return platform
 
 func spawn_wall(y: float) -> Wall:
@@ -54,12 +67,12 @@ func spawn_wall(y: float) -> Wall:
 	var width = get_screen_size().x
 	wall.set_size(Vector2(width, wall_height))
 	wall.position = Vector2(0, y)
-	$camera.add_child(wall)
+	$center.add_child(wall)
 	return wall
 
 func get_screen_size() -> Vector2:
 	var viewport = get_viewport()
-	var rect = viewport.get_visible_rect().size * $camera.zoom
+	var rect = viewport.get_visible_rect().size
 	return rect
 
 func spawn_walls() -> void:
@@ -81,7 +94,7 @@ func get_walls() -> Dictionary:
 func spawn_player() -> Player:
 	var player = PlayerScn.instance()
 	player.position = Vector2(0, 0)
-	$camera.add_child(player)
+	$center.add_child(player)
 	return player
 
 func get_current_velocity() -> Vector2:
@@ -146,5 +159,25 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("jump"):
 			player.jump_release()
 
-func spawn_background():
-	pass
+func get_background() -> Dictionary:
+	return backgrounds[Globals.level]
+
+func spawn_background() -> void:
+	var background_settings = get_background()
+	var scene = load(background_settings["path"])
+	background = scene.instance()
+	add_child(background)
+
+func move_background(delta: float) -> void:
+	var parallax = background.get_node("ParallaxBackground") as ParallaxBackground
+	var velocity = get_current_velocity()
+	var offset = velocity.x * delta * background_move_factor
+	parallax.scroll_offset.x += offset
+
+func move_walls(delta: float) -> void:
+	var velocity = get_current_velocity()
+	var offset = velocity.x * delta
+	if top_wall:
+		top_wall.move(offset)
+	if bot_wall:
+		bot_wall.move(offset)
