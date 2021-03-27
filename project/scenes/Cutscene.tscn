@@ -1,0 +1,634 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/robot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/cutscene-animation.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "cutscene"
+length = 15.0
+step = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Camera2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 500, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0, 750, -0.25, 0, 0.25, 0, 750, -0.25, 0, 0.25, 0, 296, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5, 7, 14.5, 15 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Camera2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 300, -0.25, 0, 0.25, 0, 300, -0.25, 0, 0.25, 0, 239, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 14.5, 15 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Camera2D:zoom:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5, 7, 14.5, 15 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Camera2D:zoom:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5, 7, 14.5, 15 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Monitor2/MyTube:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Monitor2/WindowFrame2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Monitor1/MonitorContent/Zoom/Tile1:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Monitor1/MonitorContent/Zoom/Tile1:position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 14, -0.25, 0, 0.25, 0, 14, -0.25, 0, 0.25, 0, 454, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Monitor1/MonitorContent/Zoom/Tile1:position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 184, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Monitor1/MonitorContent/Zoom/Tile1:scale:x")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Monitor1/MonitorContent/Zoom/Tile1:scale:y")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Monitor1/MonitorContent/Zoom/Tile1/RichTextLabel:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Monitor1/MonitorContent/Zoom/Tile2:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/13/type = "bezier"
+tracks/13/path = NodePath("Monitor1/MonitorContent/Zoom/Tile2:position:x")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"points": PoolRealArray( 334, -0.25, 0, 0.25, 0, 334, -0.25, 0, 0.25, 0, 550, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/14/type = "bezier"
+tracks/14/path = NodePath("Monitor1/MonitorContent/Zoom/Tile2:position:y")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"points": PoolRealArray( 168, -0.25, 0, 0.25, 0, 168, -0.25, 0, 0.25, 0, 215, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/15/type = "bezier"
+tracks/15/path = NodePath("Monitor1/MonitorContent/Zoom/Tile2:scale:x")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/16/type = "bezier"
+tracks/16/path = NodePath("Monitor1/MonitorContent/Zoom/Tile2:scale:y")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Monitor1/MonitorContent/Zoom/Tile2/RichTextLabel:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/19/type = "bezier"
+tracks/19/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3:position:x")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"points": PoolRealArray( -10, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0, 250, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/20/type = "bezier"
+tracks/20/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3:position:y")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 48, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/21/type = "bezier"
+tracks/21/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3:scale:x")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/22/type = "bezier"
+tracks/22/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3:scale:y")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5, 2 )
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("Monitor1/MonitorContent/Zoom/Tile4:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("Monitor1/MonitorContent/Zoom/Tile5:visible")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("Monitor1/MonitorContent/Zoom/Tile6:visible")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("Monitor1/MonitorContent/Zoom/SharedContent:visible")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("Monitor2/MyTube/Oponent:visible")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 4, 5.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/28/type = "bezier"
+tracks/28/path = NodePath("Monitor2/MyTube/Oponent/HandLeft:position:x")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"points": PoolRealArray( -22.4388, -0.25, 0, 0.25, 0, -22.4388, -0.25, 0, 0.25, 0, -22.439, -0.25, 0, 0.25, 0, 128.561, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 8, 8.5 )
+}
+tracks/29/type = "bezier"
+tracks/29/path = NodePath("Monitor2/MyTube/Oponent/HandLeft:position:y")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"points": PoolRealArray( 16.6, -0.25, 0, 0.25, 0, 56, -0.25, 0, 0.25, 0, 56, -0.25, 0, 0.25, 0, 16, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 8, 8.5 )
+}
+tracks/30/type = "bezier"
+tracks/30/path = NodePath("Monitor2/MyTube/Oponent/HandLeft:rotation_degrees")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0, 90, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 8, 8.5 )
+}
+tracks/31/type = "bezier"
+tracks/31/path = NodePath("Monitor2/MyTube/Oponent/Eye1:position:x")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"points": PoolRealArray( -14.4388, -0.25, 0, 0.25, 0, 18.0612, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 7.5 )
+}
+tracks/32/type = "bezier"
+tracks/32/path = NodePath("Monitor2/MyTube/Oponent/Eye1:position:y")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 7.5 )
+}
+tracks/33/type = "bezier"
+tracks/33/path = NodePath("Monitor2/MyTube/Oponent/Eye1:rotation_degrees")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 30, -0.25, 0, 0.25, 0, 25, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 7.5 )
+}
+tracks/34/type = "bezier"
+tracks/34/path = NodePath("Monitor2/MyTube/Oponent/Eye2:position:x")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"points": PoolRealArray( 24, -0.25, 0, 0.25, 0, 58.9233, -0.25, 0, 0.25, 0, 92.9233, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 7.5 )
+}
+tracks/35/type = "bezier"
+tracks/35/path = NodePath("Monitor2/MyTube/Oponent/Eye2:position:y")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 7.5 )
+}
+tracks/36/type = "bezier"
+tracks/36/path = NodePath("Monitor2/MyTube/Oponent/Eye2:rotation_degrees")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -30, -0.25, 0, 0.25, 0, -30, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 7.5 )
+}
+tracks/37/type = "bezier"
+tracks/37/path = NodePath("Monitor2/MyTube/Oponent/HandRight:position:x")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"points": PoolRealArray( 41.7866, -0.25, 0, 0.25, 0, 72, -0.25, 0, 0.25, 0, 77, -0.25, 0, 0.25, 0, 77, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 7, 8.5 )
+}
+tracks/38/type = "bezier"
+tracks/38/path = NodePath("Monitor2/MyTube/Oponent/HandRight:position:y")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"points": PoolRealArray( 16.6, -0.25, 0, 0.25, 0, 28.8, -0.25, 0, 0.25, 0, 47.3, -0.25, 0, 0.25, 0, 47.3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 6.5, 7, 8.5 )
+}
+tracks/39/type = "bezier"
+tracks/39/path = NodePath("Monitor2/MyTube/Oponent/HandRight:rotation_degrees")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 5.5, 8.5 )
+}
+tracks/40/type = "value"
+tracks/40/path = NodePath(".:spawn_robot")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0, 8.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[node name="Cutscene" type="Node2D"]
+script = ExtResource( 2 )
+spawn_robot = true
+
+[node name="Monitor1" type="Polygon2D" parent="."]
+position = Vector2( 10, 0 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 54, 80, 54, 80.5418, 54, 432, 69.9733, 448, 318.076, 448, 318, 504, 246, 512, 438, 512, 366, 504, 365.751, 448, 614, 448, 630, 432.498, 630, 79.6693, 614, 64, 70.4748, 64 )
+
+[node name="MonitorContent" type="Polygon2D" parent="Monitor1"]
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
+polygon = PoolVector2Array( 70, 80, 70, 408, 614, 408, 614, 80 )
+
+[node name="Zoom" type="Node2D" parent="Monitor1/MonitorContent"]
+
+[node name="Bottom" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+color = Color( 0.12549, 0.133333, 0.141176, 1 )
+polygon = PoolVector2Array( 70, 376, 614, 376, 614, 408, 70, 408 )
+
+[node name="Tile1" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+position = Vector2( 454, 184 )
+scale = Vector2( 0.6, 0.6 )
+color = Color( 0.133333, 0.133333, 0.133333, 1 )
+polygon = PoolVector2Array( 104, 128, 96, 136, 96, 216, 104, 224, 216, 224, 224, 216, 224, 136, 216, 128 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Monitor1/MonitorContent/Zoom/Tile1"]
+visible = false
+margin_left = 128.0
+margin_top = 168.0
+margin_right = 224.0
+margin_bottom = 200.0
+text = "Schafoom"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tile2" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+position = Vector2( 550, 215 )
+scale = Vector2( 0.6, 0.6 )
+color = Color( 0.133333, 0.133333, 0.133333, 1 )
+offset = Vector2( -288, -168 )
+polygon = PoolVector2Array( 224, 136, 224, 216, 232, 224, 344, 224, 352, 216, 352, 136, 342, 128, 232, 128 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Monitor1/MonitorContent/Zoom/Tile2"]
+visible = false
+margin_left = -32.0
+margin_right = 48.0
+margin_bottom = 40.0
+text = "created by"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tile3" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+position = Vector2( 250, 48 )
+scale = Vector2( 0.6, 0.6 )
+color = Color( 0.133333, 0.133333, 0.133333, 1 )
+polygon = PoolVector2Array( 438, 136, 438, 216, 446, 224, 558, 224, 566, 216, 566, 136, 558, 128, 446, 128 )
+
+[node name="Tile4" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+visible = false
+color = Color( 0.133333, 0.133333, 0.133333, 1 )
+polygon = PoolVector2Array( 110, 256, 110, 336, 118, 344, 230, 344, 238, 336, 238, 256, 230, 248, 118, 248 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Monitor1/MonitorContent/Zoom/Tile4"]
+margin_left = 150.0
+margin_top = 288.0
+margin_right = 214.0
+margin_bottom = 328.0
+text = "Matvey"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tile5" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+visible = false
+color = Color( 0.133333, 0.133333, 0.133333, 1 )
+polygon = PoolVector2Array( 270, 256, 278, 248, 390, 248, 398, 256, 398, 336, 390, 344, 278, 344, 270, 336 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Monitor1/MonitorContent/Zoom/Tile5"]
+margin_left = 318.0
+margin_top = 288.0
+margin_right = 374.0
+margin_bottom = 328.0
+text = "Marius"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tile6" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+visible = false
+color = Color( 0.133333, 0.133333, 0.133333, 1 )
+polygon = PoolVector2Array( 430, 256, 438, 248, 550, 248, 558, 256, 558, 336, 550, 344, 438, 344, 430, 336 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Monitor1/MonitorContent/Zoom/Tile6"]
+margin_left = 478.0
+margin_top = 288.0
+margin_right = 518.0
+margin_bottom = 328.0
+text = "Luke"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SharedContent" type="Node2D" parent="Monitor1/MonitorContent/Zoom"]
+position = Vector2( 86, 112 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom/SharedContent"]
+color = Color( 0.223529, 0.223529, 0.223529, 1 )
+polygon = PoolVector2Array( -8, -8, 416, -8, 416, 256, -8, 256, -8, -8 )
+
+[node name="Robot" parent="Monitor1/MonitorContent/Zoom" instance=ExtResource( 1 )]
+position = Vector2( 227.945, 289 )
+z_index = 10
+
+[node name="WindowFrame" type="Polygon2D" parent="Monitor1"]
+position = Vector2( 1, 0 )
+color = Color( 0.211765, 0.211765, 0.211765, 1 )
+polygon = PoolVector2Array( 69, 80, 69, 96, 613, 96, 613, 80 )
+
+[node name="Monitor2" type="Polygon2D" parent="."]
+position = Vector2( 776, 0 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 56, 80, 56, 432, 72, 448, 320, 448, 320, 504, 248, 512, 440, 512, 368, 504, 368, 448, 616, 448, 632, 432, 632, 80, 616, 64, 72, 64 )
+
+[node name="MyTube" type="Node2D" parent="Monitor2"]
+
+[node name="Header" type="Polygon2D" parent="Monitor2/MyTube"]
+color = Color( 0.862745, 0.862745, 0.862745, 1 )
+polygon = PoolVector2Array( 72, 96, 72, 128, 616, 128, 616, 96 )
+
+[node name="LogoContainer" type="Node2D" parent="Monitor2/MyTube/Header"]
+
+[node name="Background" type="Polygon2D" parent="Monitor2/MyTube/Header/LogoContainer"]
+z_index = 1
+polygon = PoolVector2Array( 104, 104, 104, 120, 120, 120, 128, 112, 120, 104 )
+
+[node name="Logo" type="Polygon2D" parent="Monitor2/MyTube/Header/LogoContainer"]
+position = Vector2( -16, 0 )
+z_index = 2
+color = Color( 0.701961, 0, 0, 1 )
+polygon = PoolVector2Array( 120, 104, 120, 120, 136, 112, 128, 112, 128, 120, 144, 112, 128, 104, 128, 112, 136, 112 )
+
+[node name="Body" type="Polygon2D" parent="Monitor2/MyTube"]
+polygon = PoolVector2Array( 72, 128, 72, 408, 616, 408, 616, 128 )
+
+[node name="Video" type="Polygon2D" parent="Monitor2/MyTube/Body"]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 112, 160, 112, 304, 352, 304, 352, 160 )
+
+[node name="Oponent" type="Node2D" parent="Monitor2/MyTube"]
+position = Vector2( 216, 232 )
+
+[node name="Eye1" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
+position = Vector2( 18.0612, 7 )
+rotation = 0.436332
+color = Color( 0.345098, 0.345098, 0.345098, 1 )
+polygon = PoolVector2Array( -48, -40, -48, -24, -8, -32, -8, -40 )
+
+[node name="Eye2" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
+position = Vector2( 92.9233, 7 )
+rotation = -0.523599
+color = Color( 0.345098, 0.345098, 0.345098, 1 )
+polygon = PoolVector2Array( 8, -40, 8, -32, 48, -24, 48, -40 )
+
+[node name="HandLeft" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
+position = Vector2( 128.561, 16 )
+color = Color( 0.654902, 0.294118, 0.294118, 1 )
+polygon = PoolVector2Array( -40, 0, -40, 24, 3, 24, 3, 22, -16, 22, -16, 19, -2, 19, -2, 16, -16, 16, -16, 12, -3.125, 12.125, -3.00586, 10.1873, -15.75, 9.75, -15.625, 7.375, -3.375, 7.25, -3.375, 5.5, -15.75, 5.125, -15.625, 0.375, -23.375, 0, -10.875, -5.5, -12.375, -6.875, -28.625, 0.25 )
+
+[node name="HandRight" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
+position = Vector2( 77, 47.3 )
+scale = Vector2( -1, 1 )
+color = Color( 0.243137, 0.52549, 0.176471, 1 )
+polygon = PoolVector2Array( -40, 0, -40, 24, 3, 24, 3, 22, -16, 22, -16, 19, -2, 19, -2, 16, -16, 16, -16, 12, -3.125, 12.125, -3.00586, 10.1873, -15.75, 9.75, -15.625, 7.375, -3.375, 7.25, -3.375, 5.5, -15.75, 5.125, -15.625, 0.375, -23.375, 0, -10.875, -5.5, -12.375, -6.875, -28.625, 0.25 )
+
+[node name="WindowFrame2" type="Polygon2D" parent="Monitor2"]
+color = Color( 0.211765, 0.211765, 0.211765, 1 )
+polygon = PoolVector2Array( 72, 80, 72, 96, 616, 96, 616, 80 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 296, 239 )
+current = true
+zoom = Vector2( 0.4, 0.4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "cutscene"
+anims/cutscene = SubResource( 1 )
