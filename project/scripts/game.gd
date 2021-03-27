@@ -1,13 +1,29 @@
 extends Node2D
 
 var platform_height = 40
-var wall_height = 170
+var wall_height: float
 
-var platform_min_distance: float
+var platform_min_distance: Vector2
 
 var WallScn = preload("res://scenes/wall.tscn")
 var PlatformScn = preload("res://scenes/platform.tscn")
 var PlayerScn = preload("res://scenes/player.tscn")
+
+var walls = [{
+	# Down
+	"top": "res://assets/Middle/Ground/Ground.png",
+	"bot": "res://assets/Down/Ground/Ground.png",
+	"height": 144
+}, {
+	# Middle
+	"top": "res://assets/Up/Ground/Ground.png",
+	"bot": "res://assets/Middle/Ground/Ground.png",
+	"height": 170
+}, {
+	# Up
+	"bot": "res://assets/Up/Ground/Ground.png",
+	"height": 187
+}]
 
 var top_wall: Wall
 var bot_wall: Wall
@@ -19,7 +35,8 @@ func _ready() -> void:
 	$camera.make_current()
 	spawn_walls()
 	player = spawn_player()
-	platform_min_distance = player.get_size().y
+	platform_min_distance = player.get_size()
+	print(platform_min_distance)
 
 func _physics_process(delta) -> void:
 	set_platform_velocities(delta)
@@ -46,12 +63,20 @@ func get_screen_size() -> Vector2:
 	return rect
 
 func spawn_walls() -> void:
+	var walls = get_walls()
+	wall_height = walls["height"]
 	var height = get_screen_size().y
-	top_wall = spawn_wall(-height / 2 + wall_height / 2)
-	top_wall.set_texture(preload("res://assets/Middle/Ceiling/Ceiling.png"))
-	bot_wall = spawn_wall(+height / 2 - wall_height / 2)
-	bot_wall.set_texture(preload("res://assets/Middle/Ground/Ground.png"))
+	if "top" in walls:
+		top_wall = spawn_wall(-height / 2 + wall_height / 2)
+		var texture = load(walls["top"])
+		top_wall.set_texture(texture)
+	if "bot" in walls:
+		bot_wall = spawn_wall(+height / 2 - wall_height / 2)
+		var texture = load(walls["bot"])
+		bot_wall.set_texture(texture)
 
+func get_walls() -> Dictionary:
+	return walls[Globals.level]
 
 func spawn_player() -> Player:
 	var player = PlayerScn.instance()
@@ -73,7 +98,9 @@ func get_platform_width() -> float:
 func is_platform_rect_ok(rect: Rect2) -> bool:
 	for platform in platforms:
 		var platform_rect = platform.get_rect()
-		platform_rect = platform_rect.grow(platform_min_distance)
+		platform_rect = platform_rect.grow_individual(
+				platform_min_distance.x, platform_min_distance.y,
+				platform_min_distance.x, platform_min_distance.y)
 		if rect.intersects(platform_rect):
 			return false
 	return true
@@ -82,26 +109,29 @@ func create_new_platform_rect() -> Rect2:
 	var screen_size = get_screen_size()
 	var width = get_platform_width()
 	var spread = (screen_size.y - platform_height) / 2 - wall_height
-	var spread_top = spread - platform_min_distance
+	var spread_top = spread - platform_min_distance.y
 	var spread_bot = spread
 	var y = rand_range(-spread_top, spread_bot)
 	var x = (screen_size.x + width) / 2
 	var pos = Vector2(x, y)
 	var size = Vector2(width, platform_height)
-
-	var temp_platform = PlatformScn.instance()
-	size = temp_platform.calc_size(size)
-	temp_platform.queue_free()
-
 	var rect = Rect2(pos, size)
+	return rect
+
+func adjust_platform_rect(rect: Rect2) -> Rect2:
+	var temp_platform = PlatformScn.instance()
+	rect.size = temp_platform.calc_size(rect.size)
+	temp_platform.queue_free()
 	return rect
 
 func create_new_platform() -> void:
 	for try in range(5):
 		var rect = create_new_platform_rect()
-		if not is_platform_rect_ok(rect):
+		var test_rect = adjust_platform_rect(rect)
+		if not is_platform_rect_ok(test_rect):
 			continue
 		var platform = spawn_platform(rect.position, rect.size.x)
+		print(test_rect.size, platform.get_rect().size)
 		platforms.push_back(platform)
 		return
 

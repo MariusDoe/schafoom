@@ -9,5 +9,3 @@ func set_size(size: Vector2) -> void:
 
 func set_texture(texture: Texture) -> void:
 	$sprite.texture = texture
-	
-	

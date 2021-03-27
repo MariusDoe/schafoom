@@ -36,6 +36,10 @@ config/name="schafoom"
 run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://scripts/globals.gd"
+
 [display]
 
 window/size/width=1920

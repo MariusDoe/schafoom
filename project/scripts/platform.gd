@@ -13,7 +13,7 @@ var tilesets = [{
 	"left": "res://assets/Middle/Plattform/platform1.png",
 	"middle": "res://assets/Middle/Plattform/platform2.png",
 	"right": "res://assets/Middle/Plattform/platform3.png",
-	"tile_size": Vector2(140, 60),
+	"tile_size": Vector2(70, 30),
 }, {
 	# Up
 	"left": "res://assets/Up/Plattform/left.png",
@@ -81,7 +81,7 @@ func create_texture() -> Texture:
 	return texture
 
 func get_tileset() -> Dictionary:
-	return tilesets[0]
+	return tilesets[Globals.level]
 
 func set_velocity(vel: Vector2) -> void:
 	velocity = vel
