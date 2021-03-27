@@ -110,5 +110,4 @@ func _input(event: InputEvent) -> void:
 			player.jump_release()
 			
 func spawn_background():
-	var background = preload("res://scenes/Background.tscn").instance()
-	$camera.add_child(background)
+	pass
