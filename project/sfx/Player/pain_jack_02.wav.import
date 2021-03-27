@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pain_jack_02.wav-645e4ea42b6f5c2a6ec6e8ff36244188.sample"
+
+[deps]
+
+source_file="res://sfx/Player/pain_jack_02.wav"
+dest_files=[ "res://.import/pain_jack_02.wav-645e4ea42b6f5c2a6ec6e8ff36244188.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

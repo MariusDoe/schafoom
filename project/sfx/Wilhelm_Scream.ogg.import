@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Wilhelm_Scream.ogg-a3394b64eb30ef0a76096007723470ca.oggstr"
+
+[deps]
+
+source_file="res://sfx/Wilhelm_Scream.ogg"
+dest_files=[ "res://.import/Wilhelm_Scream.ogg-a3394b64eb30ef0a76096007723470ca.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
