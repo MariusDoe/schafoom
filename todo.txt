@@ -1,0 +1,20 @@
+- potato collection (amount, ui)
+- potato spawning
+- dash checking (distance, potato, on-ground)
+- sheep animation (cut scene)
+- dash rotation / animation / ...
+- background improvements
+- score (show in ui)
+- velocity changing
+- monster chasing
+- monster collision (platforms)
+- player killing
+- sound effects, music
+- main menu
+- die screen (score submitting)
+- platform spawning improvements
+- obstacles
+
+optional
+- loot boxes
+- items
