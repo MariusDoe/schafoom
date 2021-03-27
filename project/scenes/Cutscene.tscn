@@ -1,12 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/robot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/cutscene-animation.gd" type="Script" id=2]
+[ext_resource path="res://assets/Sheep/sheep_sleeping.png" type="Texture" id=3]
+[ext_resource path="res://assets/Sheep/Sheep(2).png" type="Texture" id=4]
+[ext_resource path="res://assets/Sheep/Sheep(1).png" type="Texture" id=5]
+[ext_resource path="res://assets/Middle/Plattform/platform1.png" type="Texture" id=6]
+[ext_resource path="res://assets/Middle/Plattform/platform3.png" type="Texture" id=7]
+[ext_resource path="res://assets/Up/Ground/Ground.png" type="Texture" id=8]
+[ext_resource path="res://assets/Middle/Ground/Ground.png" type="Texture" id=9]
+[ext_resource path="res://assets/Middle/Background/Background.png" type="Texture" id=10]
+
+[sub_resource type="AnimatedTexture" id=2]
+flags = 4
+frames = 2
+frame_0/texture = ExtResource( 5 )
+frame_1/texture = ExtResource( 4 )
+frame_1/delay_sec = 0.0
 
 [sub_resource type="Animation" id=1]
 resource_name = "cutscene"
 length = 15.0
-step = 0.5
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Camera2D:position:x")
 tracks/0/interp = 1
@@ -14,8 +28,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 500, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0, 750, -0.25, 0, 0.25, 0, 750, -0.25, 0, 0.25, 0, 296, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5, 7, 14.5, 15 )
+"points": PoolRealArray( 500, -0.25, 0, 0.25, 0, 500, -0.25, 0, 0.25, 0, 750, -0.25, 0, 0.25, 0, 750, -0.25, 0, 0.25, 0, 576, -0.25, 0, 0.25, 0, 736, -0.25, 0, 0.25, 0, 1120, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5, 7, 12.3, 13, 14.2, 15 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath("Camera2D:position:y")
@@ -24,8 +38,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 300, -0.25, 0, 0.25, 0, 300, -0.25, 0, 0.25, 0, 239, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 14.5, 15 )
+"points": PoolRealArray( 300, -0.25, 0, 0.25, 0, 300, -0.25, 0, 0.25, 0, 272, -0.25, 0, 0.25, 0, 264, -0.25, 0, 0.25, 0, 248, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 12.3, 13, 14.2, 15 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath("Camera2D:zoom:x")
@@ -34,8 +48,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5, 7, 14.5, 15 )
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0, 0.29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5, 7, 12.3, 13, 15 )
 }
 tracks/3/type = "bezier"
 tracks/3/path = NodePath("Camera2D:zoom:y")
@@ -44,8 +58,8 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 5, 7, 14.5, 15 )
+"points": PoolRealArray( 0.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0, 0.29, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 5, 7, 12.3, 13, 15 )
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Monitor2/MyTube:visible")
@@ -54,10 +68,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 4, 11.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ false, true, false ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Monitor2/WindowFrame2:visible")
@@ -450,8 +464,8 @@ tracks/41/loop_wrap = true
 tracks/41/imported = false
 tracks/41/enabled = true
 tracks/41/keys = {
-"points": PoolRealArray( 177.003, -0.25, 0, 0.25, 0, 177.003, -0.25, 0, 0.25, 0, 163.518, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 8.5, 10 )
+"points": PoolRealArray( 177.003, -0.25, 0, 0.25, 0, 177.003, -0.25, 0, 0.25, 0, 163.518, -0.25, 0, 0.25, 0, 163.518, -0.25, 0, 0.25, 0, 166, -0.25, 0, 0.25, 0, 480, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 8.5, 10, 11.9, 12, 14.9 )
 }
 tracks/42/type = "bezier"
 tracks/42/path = NodePath("Monitor1/MonitorContent/Zoom/Robot:position:y")
@@ -460,13 +474,124 @@ tracks/42/loop_wrap = true
 tracks/42/imported = false
 tracks/42/enabled = true
 tracks/42/keys = {
-"points": PoolRealArray( 377.4, -0.25, 0, 0.25, 0, 377.4, -0.25, 0, 0.25, 0, 293.495, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 8.5, 10 )
+"points": PoolRealArray( 377.4, -0.25, 0, 0.25, 0, 377.4, -0.25, 0, 0.25, 0, 293.495, -0.25, 0, 0.25, 0, 293.495, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 8.5, 10, 11.9, 12, 14.9 )
+}
+tracks/43/type = "bezier"
+tracks/43/path = NodePath("Polygon2D:color:a")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 13.5, 15 )
+}
+tracks/44/type = "value"
+tracks/44/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3/sheep_sleeping:texture")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/keys = {
+"times": PoolRealArray( 0, 12 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), SubResource( 2 ) ]
+}
+tracks/45/type = "bezier"
+tracks/45/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3/sheep_sleeping:position:x")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/keys = {
+"points": PoolRealArray( 504, -0.25, 0, 0.25, 0, 504, -0.25, 0, 0.25, 0, 504, -0.25, 0, 0.25, 0, 504, -0.25, 0, 0.25, 0, 566.667, -0.25, 0, 0.25, 0, 566.667, -0.25, 0, 0.25, 0, 1030, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 11.5, 11.75, 12, 12.5, 12.75, 13 )
+}
+tracks/46/type = "bezier"
+tracks/46/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3/sheep_sleeping:position:y")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/keys = {
+"points": PoolRealArray( 176, -0.25, 0, 0.25, 0, 176, -0.25, 0, 0.25, 0, 160, -0.25, 0, 0.25, 0, 176, -0.25, 0, 0.25, 0, 186.667, -0.25, 0, 0.25, 0, 186.667, -0.25, 0, 0.25, 0, 520, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 11.5, 11.75, 12, 12.5, 12.75, 13 )
+}
+tracks/47/type = "bezier"
+tracks/47/path = NodePath("Monitor1/MonitorContent/Zoom/Robot:scale:x")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 9.5, 10 )
+}
+tracks/48/type = "bezier"
+tracks/48/path = NodePath("Monitor1/MonitorContent/Zoom/Robot:scale:y")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 9.5, 10 )
+}
+tracks/49/type = "value"
+tracks/49/path = NodePath("Monitor2/GameView:visible")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/keys = {
+"times": PoolRealArray( 0, 11.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/50/type = "value"
+tracks/50/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3/sheep_sleeping:visible")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/keys = {
+"times": PoolRealArray( 0, 12.75, 13 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/51/type = "value"
+tracks/51/path = NodePath(".:walking")
+tracks/51/interp = 1
+tracks/51/loop_wrap = true
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/keys = {
+"times": PoolRealArray( 0, 12 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/52/type = "value"
+tracks/52/path = NodePath("Monitor1/MonitorContent/Zoom/Robot:visible")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/keys = {
+"times": PoolRealArray( 11.9, 12 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [node name="Cutscene" type="Node2D"]
 script = ExtResource( 2 )
 spawn_robot = true
+walking = true
 
 [node name="Monitor1" type="Polygon2D" parent="."]
 position = Vector2( 10, 0 )
@@ -523,6 +648,12 @@ scale = Vector2( 0.6, 0.6 )
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
 polygon = PoolVector2Array( 438, 136, 438, 216, 446, 224, 558, 224, 566, 216, 566, 136, 558, 128, 446, 128 )
 
+[node name="sheep_sleeping" type="Sprite" parent="Monitor1/MonitorContent/Zoom/Tile3"]
+position = Vector2( 1030, 520 )
+scale = Vector2( -0.15, 0.15 )
+z_index = 5
+texture = SubResource( 2 )
+
 [node name="Tile4" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
 visible = false
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
@@ -576,8 +707,7 @@ color = Color( 0.223529, 0.223529, 0.223529, 1 )
 polygon = PoolVector2Array( -8, -8, 416, -8, 416, 256, -8, 256, -8, -8 )
 
 [node name="Robot" parent="Monitor1/MonitorContent/Zoom" instance=ExtResource( 1 )]
-position = Vector2( 159.023, 375.902 )
-scale = Vector2( 1, 1 )
+position = Vector2( 293.407, 180 )
 z_index = 10
 
 [node name="WindowFrame" type="Polygon2D" parent="Monitor1"]
@@ -590,7 +720,12 @@ position = Vector2( 776, 0 )
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( 56, 80, 56, 432, 72, 448, 320, 448, 320, 504, 248, 512, 440, 512, 368, 504, 368, 448, 616, 448, 632, 432, 632, 80, 616, 64, 72, 64 )
 
+[node name="WindowFrame2" type="Polygon2D" parent="Monitor2"]
+color = Color( 0.211765, 0.211765, 0.211765, 1 )
+polygon = PoolVector2Array( 72, 80, 72, 96, 616, 96, 616, 80 )
+
 [node name="MyTube" type="Node2D" parent="Monitor2"]
+visible = false
 
 [node name="Header" type="Polygon2D" parent="Monitor2/MyTube"]
 color = Color( 0.862745, 0.862745, 0.862745, 1 )
@@ -641,14 +776,50 @@ scale = Vector2( -1, 1 )
 color = Color( 0.243137, 0.52549, 0.176471, 1 )
 polygon = PoolVector2Array( -40, 0, -40, 24, 3, 24, 3, 22, -16, 22, -16, 19, -2, 19, -2, 16, -16, 16, -16, 12, -3.125, 12.125, -3.00586, 10.1873, -15.75, 9.75, -15.625, 7.375, -3.375, 7.25, -3.375, 5.5, -15.75, 5.125, -15.625, 0.375, -23.375, 0, -10.875, -5.5, -12.375, -6.875, -28.625, 0.25 )
 
-[node name="WindowFrame2" type="Polygon2D" parent="Monitor2"]
-color = Color( 0.211765, 0.211765, 0.211765, 1 )
-polygon = PoolVector2Array( 72, 80, 72, 96, 616, 96, 616, 80 )
+[node name="GameView" type="Node2D" parent="Monitor2"]
+
+[node name="Background" type="Sprite" parent="Monitor2/GameView"]
+position = Vector2( 344, 252 )
+scale = Vector2( 0.283333, 0.288889 )
+texture = ExtResource( 10 )
+
+[node name="Ground" type="Sprite" parent="Monitor2/GameView"]
+position = Vector2( 345.375, 391.25 )
+scale = Vector2( 0.281169, 0.179412 )
+texture = ExtResource( 9 )
+
+[node name="Top" type="Sprite" parent="Monitor2/GameView"]
+position = Vector2( 344, 104 )
+scale = Vector2( 0.286769, 0.114973 )
+texture = ExtResource( 8 )
+
+[node name="platform1" type="Sprite" parent="Monitor2/GameView"]
+position = Vector2( 269, 248 )
+texture = ExtResource( 6 )
+
+[node name="platform3" type="Sprite" parent="Monitor2/GameView"]
+position = Vector2( 304, 248 )
+texture = ExtResource( 7 )
+
+[node name="platform2" type="Sprite" parent="Monitor2/GameView"]
+position = Vector2( 467, 183 )
+texture = ExtResource( 6 )
+
+[node name="platform4" type="Sprite" parent="Monitor2/GameView"]
+position = Vector2( 502, 183 )
+texture = ExtResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 750, 300 )
+position = Vector2( 593.057, 271.147 )
 current = true
+zoom = Vector2( 0.392743, 0.392743 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "cutscene"
 anims/cutscene = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 0, -8 )
+z_index = 20
+color = Color( 0, 0, 0, 0 )
+polygon = PoolVector2Array( -376, -344, -376, 992, 2280, 992, 2280, -344 )
