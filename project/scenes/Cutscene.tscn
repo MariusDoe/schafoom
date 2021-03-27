@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/robot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/cutscene-animation.gd" type="Script" id=2]
@@ -10,16 +10,17 @@
 [ext_resource path="res://assets/Up/Ground/Ground.png" type="Texture" id=8]
 [ext_resource path="res://assets/Middle/Ground/Ground.png" type="Texture" id=9]
 [ext_resource path="res://assets/Middle/Background/Background.png" type="Texture" id=10]
+[ext_resource path="res://assets/Cutscene/desk.png" type="Texture" id=11]
+[ext_resource path="res://assets/Cutscene/background.png" type="Texture" id=12]
 
-[sub_resource type="AnimatedTexture" id=2]
+[sub_resource type="AnimatedTexture" id=1]
 flags = 4
 frames = 2
 frame_0/texture = ExtResource( 5 )
 frame_1/texture = ExtResource( 4 )
 frame_1/delay_sec = 0.0
 
-[sub_resource type="Animation" id=1]
-resource_name = "cutscene"
+[sub_resource type="Animation" id=2]
 length = 15.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Camera2D:position:x")
@@ -497,7 +498,7 @@ tracks/44/keys = {
 "times": PoolRealArray( 0, 12 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ), SubResource( 2 ) ]
+"values": [ ExtResource( 3 ), SubResource( 1 ) ]
 }
 tracks/45/type = "bezier"
 tracks/45/path = NodePath("Monitor1/MonitorContent/Zoom/Tile3/sheep_sleeping:position:x")
@@ -652,7 +653,7 @@ polygon = PoolVector2Array( 438, 136, 438, 216, 446, 224, 558, 224, 566, 216, 56
 position = Vector2( 1030, 520 )
 scale = Vector2( -0.15, 0.15 )
 z_index = 5
-texture = SubResource( 2 )
+texture = SubResource( 1 )
 
 [node name="Tile4" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
 visible = false
@@ -816,10 +817,23 @@ zoom = Vector2( 0.392743, 0.392743 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "cutscene"
-anims/cutscene = SubResource( 1 )
+anims/cutscene = SubResource( 2 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2( 0, -8 )
 z_index = 20
 color = Color( 0, 0, 0, 0 )
 polygon = PoolVector2Array( -376, -344, -376, 992, 2280, 992, 2280, -344 )
+
+[node name="desk" type="Sprite" parent="."]
+position = Vector2( 760, 568 )
+scale = Vector2( 1.5, 1.5 )
+z_index = -5
+texture = ExtResource( 11 )
+
+[node name="mosaic-2790339_1280" type="Sprite" parent="."]
+modulate = Color( 0.247059, 0.247059, 0.247059, 1 )
+position = Vector2( 752, 376 )
+scale = Vector2( 1.68437, 1.68437 )
+z_index = -20
+texture = ExtResource( 12 )
