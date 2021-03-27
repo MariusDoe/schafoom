@@ -53,7 +53,6 @@ func _physics_process(delta) -> void:
 	spawn_platforms()
 	move_background(delta)
 	move_walls(delta)
-	
 
 func spawn_platform(pos: Vector2, width: float) -> Platform:
 	var platform = PlatformScn.instance()
@@ -181,3 +180,7 @@ func move_walls(delta: float) -> void:
 		top_wall.move(offset)
 	if bot_wall:
 		bot_wall.move(offset)
+
+func explode_wall(wall: Wall) -> void:
+	var exploded = wall.explode()
+	$center.add_child(exploded)
