@@ -4,6 +4,8 @@
 [ext_resource path="res://assets/Middle/Plattform/platform3.png" type="Texture" id=2]
 [ext_resource path="res://assets/Middle/Plattform/platform2.png" type="Texture" id=3]
 
+
+
 [resource]
 0/name = "left"
 0/texture = ExtResource( 1 )

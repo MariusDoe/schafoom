@@ -86,7 +86,14 @@ func create_new_platform_rect() -> Rect2:
 	var spread_bot = spread
 	var y = rand_range(-spread_top, spread_bot)
 	var x = (screen_size.x + width) / 2
-	var rect = Rect2(x, y, width, platform_height)
+	var pos = Vector2(x, y)
+	var size = Vector2(width, platform_height)
+	
+	var temp_platform = PlatformScn.instance()
+	size = temp_platform.calc_size(size)
+	temp_platform.queue_free()
+	
+	var rect = Rect2(pos, size)
 	return rect
 
 func create_new_platform() -> void:
@@ -110,5 +117,5 @@ func _input(event: InputEvent) -> void:
 			player.jump_release()
 			
 func spawn_background():
-	var background = preload("res://scenes/Background.tscn").instance()
+	var background = preload("res://scenes/Background_Middle.tscn").instance()
 	$camera.add_child(background)
