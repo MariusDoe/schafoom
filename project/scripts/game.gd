@@ -1,11 +1,12 @@
 extends Node2D
 
 var platform_height = 40
-var wall_height: float
 var background_move_factor = 0.5
-var dash_distance = 100
+var dash_distance = 300
+var dash_potato_count = 5
 var potato_probability = 0.1
 
+var wall_height: float
 var platform_min_distance: Vector2
 
 var PotatoScn = preload("res://scenes/Potato.tscn")
@@ -55,6 +56,7 @@ func _physics_process(delta) -> void:
 	set_platform_velocities()
 	set_player_apparent_velocity()
 	spawn_platforms()
+	remove_platforms()
 	move_background(delta)
 	move_walls(delta)
 
@@ -106,7 +108,9 @@ func spawn_player() -> Player:
 	return player
 
 func get_current_velocity() -> Vector2:
-	return Vector2(-100, 0)
+	var t = Globals.time
+	var velocity = 20 * pow(t, 0.4) + 100
+	return Vector2(-velocity, 0)
 
 func set_platform_velocities() -> void:
 	var velocity = get_current_velocity()
@@ -166,6 +170,16 @@ func spawn_platforms() -> void:
 	if randf() < 0.01:
 		try_spawn_platform()
 
+func remove_platforms() -> void:
+	var left_border = -get_screen_size().x / 2
+	for i in range(platforms.size() - 1, -1, -1):
+		var platform = platforms[i]
+		var width = platform.get_rect().size.x
+		if platform.position.x + width / 2 < left_border:
+			platforms.remove(i)
+			platform.queue_free()
+			print("removed")
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.is_action_pressed("jump"):
@@ -173,9 +187,9 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("jump"):
 			player.jump_release()
 		if event.is_action_pressed("dash_down"):
-			player.dash_down()
+			try_dash_down()
 		if event.is_action_pressed("dash_up"):
-			player.dash_up()
+			try_dash_up()
 
 func get_background() -> Dictionary:
 	return backgrounds[Globals.level]
@@ -237,6 +251,7 @@ func _on_done_dashing() -> void:
 func spawn_potato(platform: Platform) -> Potato:
 	var potato = PotatoScn.instance()
 	platform.add_child(potato)
+	potato.connect("eaten_potato", self, "_on_eaten_potato")
 	return potato
 
 func spawn_potatoes(platform: Platform) -> void:
@@ -250,3 +265,29 @@ func spawn_potatoes(platform: Platform) -> void:
 	var offset_y = (platform_height + potato_size.y) / 2
 	var offset = Vector2(offset_x, -offset_y)
 	potato.position = offset
+
+func _on_eaten_potato() -> void:
+	player.potato_count += 1
+
+func try_dash_down() -> void:
+	try_dash(Player.Direction.DOWN)
+
+func try_dash_up() -> void:
+	try_dash(Player.Direction.UP)
+
+func try_dash(direction: int) -> void:
+	if player.potato_count < dash_potato_count:
+		return
+	
+	var screen_height = get_screen_size().y
+	var distance: float
+	match direction:
+		Player.Direction.UP:
+			distance = -(-screen_height / 2 - player.position.y)
+		Player.Direction.DOWN:
+			distance = -screen_height / 2 - player.position.y
+	if distance > dash_distance:
+		return
+	
+	player.potato_count -= dash_potato_count
+	player.dash(direction)

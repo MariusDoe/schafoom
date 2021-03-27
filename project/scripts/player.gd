@@ -104,13 +104,7 @@ func get_dash_curve() -> Curve:
 			return dash_curve_down
 	return null
 
-func dash_up() -> void:
-	start_dash(Direction.UP)
-
-func dash_down() -> void:
-	start_dash(Direction.DOWN)
-
-func start_dash(direction: int) -> void:
+func dash(direction: int) -> void:
 	dash_direction = direction
 	dash_start_y = position.y
 	dash_time = 0.0
