@@ -28,6 +28,8 @@ var tile_count: int
 var tile_scale: float
 var y: float
 
+var ExplodedScn = preload("res://scenes/exploded.tscn")
+
 func _ready() -> void:
 	$shape.shape = $shape.shape.duplicate()
 	y = position.y
@@ -97,3 +99,10 @@ func handle_push_player() -> void:
 		var collider = collision.collider
 		if collider is Player:
 			collider.get_pushed(velocity)
+
+func explode() -> Node2D:
+	var exploded = ExplodedScn.instance()
+	var rect = Rect2(position - size / 2, size)
+	exploded.create(rect, $sprite.texture.duplicate(true), 10)
+	queue_free()
+	return exploded

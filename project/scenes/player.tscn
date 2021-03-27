@@ -25,6 +25,5 @@ shape = SubResource( 1 )
 scale = Vector2( 0.221802, 0.221802 )
 frames = SubResource( 2 )
 animation = "Sheep"
-frame = 1
 playing = true
 flip_h = true

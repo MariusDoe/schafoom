@@ -19,8 +19,8 @@ func set_texture(texture: Texture) -> void:
 	$sprite.texture = texture
 
 func explode() -> Node2D:
-	queue_free()
 	var exploded = ExplodedScn.instance()
 	var rect = Rect2(position - size / 2, size)
-	exploded.create(rect, $sprite.texture, 50)
+	exploded.create(rect, $sprite.texture.duplicate(true), 50)
+	queue_free()
 	return exploded
