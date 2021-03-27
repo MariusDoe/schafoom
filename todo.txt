@@ -1,19 +1,37 @@
+(Matvey)
 - potato collection (amount, ui)
-- potato spawning
-- dash checking (distance, potato, on-ground)
-- sheep animation (cut scene)
-- dash rotation / animation / ...
-- background improvements
 - score (show in ui)
+
+- main menu
+- die screen (score submitting)
+
+- sound effects, music
+
+
+(Luke)
+- sheep animation (cut scene)
+
+
+(Marius)
+- dash checking (distance, potato, on-ground)
+- dash rotation / animation / ...
+
+- potato spawning
+- platform spawning improvements
+
+
+
+(To be done)
 - velocity changing
+
 - monster chasing
 - monster collision (platforms)
 - player killing
-- sound effects, music
-- main menu
-- die screen (score submitting)
-- platform spawning improvements
+
+- background improvements
 - obstacles
+
+
 
 optional
 - loot boxes
