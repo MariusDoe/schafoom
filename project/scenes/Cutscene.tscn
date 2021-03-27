@@ -443,6 +443,26 @@ tracks/40/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/41/type = "bezier"
+tracks/41/path = NodePath("Monitor1/MonitorContent/Zoom/Robot:position:x")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/keys = {
+"points": PoolRealArray( 177.003, -0.25, 0, 0.25, 0, 177.003, -0.25, 0, 0.25, 0, 163.518, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 8.5, 10 )
+}
+tracks/42/type = "bezier"
+tracks/42/path = NodePath("Monitor1/MonitorContent/Zoom/Robot:position:y")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/keys = {
+"points": PoolRealArray( 377.4, -0.25, 0, 0.25, 0, 377.4, -0.25, 0, 0.25, 0, 293.495, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 8.5, 10 )
+}
 
 [node name="Cutscene" type="Node2D"]
 script = ExtResource( 2 )
@@ -556,7 +576,8 @@ color = Color( 0.223529, 0.223529, 0.223529, 1 )
 polygon = PoolVector2Array( -8, -8, 416, -8, 416, 256, -8, 256, -8, -8 )
 
 [node name="Robot" parent="Monitor1/MonitorContent/Zoom" instance=ExtResource( 1 )]
-position = Vector2( 227.945, 289 )
+position = Vector2( 159.023, 375.902 )
+scale = Vector2( 1, 1 )
 z_index = 10
 
 [node name="WindowFrame" type="Polygon2D" parent="Monitor1"]
@@ -625,9 +646,8 @@ color = Color( 0.211765, 0.211765, 0.211765, 1 )
 polygon = PoolVector2Array( 72, 80, 72, 96, 616, 96, 616, 80 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 296, 239 )
+position = Vector2( 750, 300 )
 current = true
-zoom = Vector2( 0.4, 0.4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "cutscene"
