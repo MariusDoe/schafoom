@@ -4,13 +4,19 @@ var start_velocity_min = 1.0
 var start_velocity_max = 1000.0
 var max_spin = deg2rad(180)
 var gravity = Vector2(0, 500.0)
+var lifetime = 5.0
 
 var triangles: Array
 var velocities: Array
 
+var timer: float
+
 func _physics_process(delta: float) -> void:
 	if triangles:
 		move_triangles(delta)
+		timer += delta
+		if timer > lifetime:
+			queue_free()
 
 func create(rect: Rect2, texture: Texture, num_points: int):
 	var points = PoolVector2Array()
@@ -45,6 +51,8 @@ func create(rect: Rect2, texture: Texture, num_points: int):
 		var velocity = Vector2(cos(velocity_angle), sin(velocity_angle))
 		velocity *= rand_range(start_velocity_min, start_velocity_max)
 		velocities.push_back(velocity)
+	
+	timer = 0.0
 
 func move_triangles(delta: float) -> void:
 	for i in range(triangles.size()):

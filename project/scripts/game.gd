@@ -6,6 +6,7 @@ var background_move_factor = 0.5
 
 var platform_min_distance: Vector2
 
+var PotatoScn = preload("res://scenes/Potato.tscn")
 var WallScn = preload("res://scenes/wall.tscn")
 var PlatformScn = preload("res://scenes/platform.tscn")
 var PlayerScn = preload("res://scenes/player.tscn")
@@ -49,7 +50,8 @@ func _ready() -> void:
 	platform_min_distance = player.get_size()
 
 func _physics_process(delta) -> void:
-	set_platform_velocities(delta)
+	set_platform_velocities()
+	set_player_apparent_velocity()
 	spawn_platforms()
 	move_background(delta)
 	move_walls(delta)
@@ -59,6 +61,10 @@ func spawn_platform(pos: Vector2, width: float) -> Platform:
 	platform.set_size(Vector2(width, platform_height))
 	platform.position = pos
 	$center.add_child(platform)
+	var potato = spawn_potato(platform)
+	var offset_y = (platform_height + potato.get_size().y) / 2
+	var offset = Vector2(0, -offset_y)
+	potato.position = offset
 	return platform
 
 func spawn_wall(y: float) -> Wall:
@@ -93,16 +99,22 @@ func get_walls() -> Dictionary:
 func spawn_player() -> Player:
 	var player = PlayerScn.instance()
 	player.position = Vector2(0, 0)
+	player.connect("destroy", self, "_on_destroy")
+	player.connect("done_dashing", self, "_on_done_dashing")
 	$center.add_child(player)
 	return player
 
 func get_current_velocity() -> Vector2:
 	return Vector2(-100, 0)
 
-func set_platform_velocities(delta: float) -> void:
+func set_platform_velocities() -> void:
 	var velocity = get_current_velocity()
 	for platform in platforms:
 		platform.set_velocity(velocity)
+
+func set_player_apparent_velocity() -> void:
+	var velocity = get_current_velocity()
+	player.apparent_velocity = -velocity
 
 func get_platform_width() -> float:
 	return rand_range(100, 500)
@@ -131,9 +143,11 @@ func create_new_platform_rect() -> Rect2:
 	return rect
 
 func adjust_platform_rect(rect: Rect2) -> Rect2:
+	var old_size = rect.size
 	var temp_platform = PlatformScn.instance()
 	rect.size = temp_platform.calc_size(rect.size)
 	temp_platform.queue_free()
+	rect.position.x += (old_size.x - rect.size.x) / 2
 	return rect
 
 func create_new_platform() -> void:
@@ -142,8 +156,7 @@ func create_new_platform() -> void:
 		var test_rect = adjust_platform_rect(rect)
 		if not is_platform_rect_ok(test_rect):
 			continue
-		var platform = spawn_platform(rect.position, rect.size.x)
-		print(test_rect.size, platform.get_rect().size)
+		var platform = spawn_platform(test_rect.position, rect.size.x)
 		platforms.push_back(platform)
 		return
 
@@ -157,6 +170,10 @@ func _input(event: InputEvent) -> void:
 			player.jump_trigger()
 		if event.is_action_released("jump"):
 			player.jump_release()
+		if event.is_action_pressed("dash_down"):
+			player.dash_down()
+		if event.is_action_pressed("dash_up"):
+			player.dash_up()
 
 func get_background() -> Dictionary:
 	return backgrounds[Globals.level]
@@ -184,3 +201,38 @@ func move_walls(delta: float) -> void:
 func explode_wall(wall: Wall) -> void:
 	var exploded = wall.explode()
 	$center.add_child(exploded)
+
+func explode_platform(platform: Platform) -> void:
+	platforms.erase(platform)
+	var exploded = platform.explode()
+	$center.add_child(exploded)
+
+func _on_destroy(thing) -> void:
+	if thing is Wall:
+		if top_wall == thing:
+			explode_wall(top_wall)
+			top_wall = null
+		if bot_wall == thing:
+			explode_wall(bot_wall)
+			bot_wall = null
+	if thing is Platform:
+		explode_platform(thing)
+
+func switch_level(direction: int) -> void:
+	var new_level = Globals.level
+	match direction:
+		Player.Direction.UP:
+			new_level += 1
+		Player.Direction.DOWN:
+			new_level -= 1
+
+	Globals.level = new_level
+	get_tree().change_scene("res://scenes/game.tscn")
+
+func _on_done_dashing() -> void:
+	switch_level(player.dash_direction)
+
+func spawn_potato(platform: Platform) -> Potato:
+	var potato = PotatoScn.instance()
+	platform.add_child(potato)
+	return potato
