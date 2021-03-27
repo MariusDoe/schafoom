@@ -2,7 +2,6 @@ extends Node2D
 
 var start_velocity_min = 1.0
 var start_velocity_max = 1000.0
-var max_spin = deg2rad(180)
 var gravity = Vector2(0, 500.0)
 var lifetime = 5.0
 

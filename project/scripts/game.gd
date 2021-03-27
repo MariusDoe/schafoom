@@ -3,6 +3,8 @@ extends Node2D
 var platform_height = 40
 var wall_height: float
 var background_move_factor = 0.5
+var dash_distance = 100
+var potato_probability = 0.1
 
 var platform_min_distance: Vector2
 
@@ -56,15 +58,14 @@ func _physics_process(delta) -> void:
 	move_background(delta)
 	move_walls(delta)
 
-func spawn_platform(pos: Vector2, width: float) -> Platform:
+func spawn_platform(settings: Dictionary) -> Platform:
+	var position = settings["position"]
+	var calced = settings["calced"]
 	var platform = PlatformScn.instance()
-	platform.set_size(Vector2(width, platform_height))
-	platform.position = pos
+	platform.set_size(calced)
+	platform.position = position
 	$center.add_child(platform)
-	var potato = spawn_potato(platform)
-	var offset_y = (platform_height + potato.get_size().y) / 2
-	var offset = Vector2(0, -offset_y)
-	potato.position = offset
+	spawn_potatoes(platform)
 	return platform
 
 func spawn_wall(y: float) -> Wall:
@@ -129,40 +130,41 @@ func is_platform_rect_ok(rect: Rect2) -> bool:
 			return false
 	return true
 
-func create_new_platform_rect() -> Rect2:
+func is_platform_settings_ok(settings: Dictionary) -> bool:
+	var pos = settings["position"]
+	var size = settings["calced"]["size"]
+	var rect = Rect2(pos - size / 2, size)
+	return is_platform_rect_ok(rect)
+
+func create_platform_settings() -> Dictionary:
 	var screen_size = get_screen_size()
 	var width = get_platform_width()
+	var size = Vector2(width, platform_height)
+	var calced = Platform.calc(size)
+	var calced_size = calced["size"]
 	var spread = (screen_size.y - platform_height) / 2 - wall_height
 	var spread_top = spread - platform_min_distance.y
 	var spread_bot = spread
 	var y = rand_range(-spread_top, spread_bot)
-	var x = (screen_size.x + width) / 2
+	var x = (screen_size.x + calced_size.x) / 2
 	var pos = Vector2(x, y)
-	var size = Vector2(width, platform_height)
-	var rect = Rect2(pos, size)
-	return rect
+	return {
+		"position": pos,
+		"calced": calced
+	}
 
-func adjust_platform_rect(rect: Rect2) -> Rect2:
-	var old_size = rect.size
-	var temp_platform = PlatformScn.instance()
-	rect.size = temp_platform.calc_size(rect.size)
-	temp_platform.queue_free()
-	rect.position.x += (old_size.x - rect.size.x) / 2
-	return rect
-
-func create_new_platform() -> void:
+func try_spawn_platform() -> void:
 	for try in range(5):
-		var rect = create_new_platform_rect()
-		var test_rect = adjust_platform_rect(rect)
-		if not is_platform_rect_ok(test_rect):
+		var settings = create_platform_settings()
+		if not is_platform_settings_ok(settings):
 			continue
-		var platform = spawn_platform(test_rect.position, rect.size.x)
+		var platform = spawn_platform(settings)
 		platforms.push_back(platform)
 		return
 
 func spawn_platforms() -> void:
 	if randf() < 0.01:
-		create_new_platform()
+		try_spawn_platform()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -236,3 +238,15 @@ func spawn_potato(platform: Platform) -> Potato:
 	var potato = PotatoScn.instance()
 	platform.add_child(potato)
 	return potato
+
+func spawn_potatoes(platform: Platform) -> void:
+	if randf() >= potato_probability:
+		return
+	var potato = spawn_potato(platform)
+	var potato_size = potato.get_size()
+	var platform_width = platform.get_rect().size.x
+	var spread = (platform_width - potato_size.x) / 2
+	var offset_x = rand_range(-spread, spread)
+	var offset_y = (platform_height + potato_size.y) / 2
+	var offset = Vector2(offset_x, -offset_y)
+	potato.position = offset

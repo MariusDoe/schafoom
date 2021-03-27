@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 class_name Platform
 
-var tilesets = [{
+const tilesets = [{
 	# Down
 	"left": "res://assets/Down/Plattform/platformIndustrial1.png",
 	"middle": "res://assets/Down/Plattform/platformIndustrial2.png",
@@ -39,26 +39,35 @@ func _physics_process(delta) -> void:
 	handle_push_player()
 	position.y = y
 
-func set_size(new_size: Vector2) -> void:
-	size = calc_size(new_size)
-	var texture = create_texture()
+func set_size(calced: Dictionary) -> void:
+	size = calced["size"]
+	tile_scale = calced["tile_scale"]
+	tile_count = calced["tile_count"]
 	
+	var texture = create_texture()
 	var rectangle = $shape.shape as RectangleShape2D
 	rectangle.extents = size / 2
 	$sprite.texture = texture
 	$sprite.scale = Vector2(tile_scale, tile_scale)
 
-func calc_size(new_size: Vector2) -> Vector2:
+static func calc(new_size: Vector2) -> Dictionary:
 	var tileset = get_tileset()
 	var tile_size = tileset["tile_size"]
 	
-	tile_scale = new_size.y / tile_size.y
+	var tile_scale = new_size.y / tile_size.y
 	var scaled_tile_size = tile_scale * tile_size
-	tile_count = ceil(new_size.x / scaled_tile_size.x)
+	var tile_count = ceil(new_size.x / scaled_tile_size.x)
 	if tile_count < 2:
 		tile_count = 2
 	var size = Vector2(tile_count, 1) * scaled_tile_size
-	return size
+	return {
+		"tile_scale": tile_scale,
+		"tile_count": tile_count,
+		"size": size,
+	}
+
+static func get_tileset() -> Dictionary:
+	return tilesets[Globals.level]
 
 func create_texture() -> Texture:
 	var tileset = get_tileset()
@@ -79,17 +88,13 @@ func create_texture() -> Texture:
 	texture.add_piece(offset, right_texture)
 	offset += offset_add
 	
-	texture
 	return texture
-
-func get_tileset() -> Dictionary:
-	return tilesets[Globals.level]
 
 func set_velocity(vel: Vector2) -> void:
 	velocity = vel
 
 func get_rect() -> Rect2:
-	var rect = Rect2(position, size)
+	var rect = Rect2(position - size / 2, size)
 	return rect
 
 func handle_push_player() -> void:
