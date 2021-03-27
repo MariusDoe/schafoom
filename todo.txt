@@ -1,5 +1,5 @@
 (Matvey)
-- potato collection (amount, ui)
+- potato collection (ui)
 - score (show in ui)
 
 - main menu
@@ -13,18 +13,13 @@
 
 
 (Marius)
-- dash checking (distance, potato, on-ground)
-
 - fix platform explosion texture bug
 
-- potato spawning
 - platform spawning improvements
 
 
 
 (To be done)
-- velocity changing
-
 - monster chasing
 - monster collision (platforms)
 - player killing
