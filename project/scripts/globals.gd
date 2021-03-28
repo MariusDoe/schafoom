@@ -28,11 +28,6 @@ func _physics_process(delta):
 
 func start_cutscene():
 	get_tree().change_scene("res://scenes/Cutscene.tscn")
-	#var stream = preload("res://sfx/Music/Juhani Junkala [Chiptune Adventures] 1. Stage 1.wav")
-	#stream.loop_mode = AudioStreamSample.LOOP_FORWARD
-	#stream.loop_end = stream.get_length() * stream.mix_rate
-	#var volume = -15
-	#set_music(stream, volume)
 	music_player.stop()
 
 func start_game():
@@ -80,41 +75,42 @@ func submit_score(name: String):
 	else:
 		uploading = Uploading.NOT_YET
 
-var upload_status: String
-
-func get_response(http_request: HTTPRequest, url: String) -> String:
+func get_response(http_request: HTTPRequest, url: String) -> Array:
 	if http_request.request(url, [], true, HTTPClient.METHOD_POST) != OK:
-		upload_status = "Sending score failed"
+		show_upload_status("Sending score failed")
 		return null
 	var response = yield(http_request, "request_completed")
 	if response[1] != 200:
-		upload_status = "Sending score returned " + str(response[1])
+		show_upload_status("Sending score returned " + str(response[1]))
 		return null
 	return response
 
 func upload_time(name: String, score: float):
-	upload_status = "Uploading the score " + str(score) + " as " + name + "..."
+	show_upload_status("Uploading the score " + str(score) + " as " + name + "...")
 	var http_request = HTTPRequest.new()
 	add_child(http_request)
 
 	var url = ("https://scores.tmbe.me/score?game=" + GAME_NAME.percent_encode() +
 		"&player=" + name.percent_encode() +
-		"&score=" + str(score).percent_encode())
+		"&score=" + get_formatted_score().percent_encode())
 
 	var response = get_response(http_request, url)
+	
+	if response is GDScriptFunctionState:
+		response = yield(response, "completed")
+	
 	remove_child(http_request)
-
+	
 	if response == null:
 		return false
 	
-	print(response)
 	var res = JSON.parse(response[3].get_string_from_utf8()).result
 	if res.has("position"):
 		var position = res["position"]
-		upload_status = "Highscore submitted! - You scored position " \
-				+ str(position)
+		show_upload_status("Score submitted! - You scored position " \
+				+ str(position))
 		return false
-	upload_status = "Something went wrong..."
+	show_upload_status("Something went wrong...")
 	return true
 
 func is_level_ok(level: int) -> bool:
@@ -128,3 +124,7 @@ func set_music(stream: AudioStream, volume: float) -> void:
 
 func get_formatted_score() -> String:
 	return "%.1f" % time
+
+func show_upload_status(text: String) -> void:
+	var status = get_node("/root/Game_Over/Background/Upload_Status")
+	status.text = text

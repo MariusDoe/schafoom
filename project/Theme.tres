@@ -4,7 +4,7 @@
 [ext_resource path="res://Theme_style_normal.tres" type="StyleBox" id=2]
 [ext_resource path="res://Theme_style_focus.tres" type="StyleBox" id=3]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 72
 outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
@@ -12,7 +12,7 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [resource]
-default_font = SubResource( 2 )
+default_font = SubResource( 1 )
 LineEdit/colors/clear_button_color = Color( 0.88, 0.88, 0.88, 1 )
 LineEdit/colors/clear_button_color_pressed = Color( 1, 1, 1, 1 )
 LineEdit/colors/cursor_color = Color( 0.94, 0.94, 0.94, 1 )
