@@ -53,7 +53,7 @@ func dash(new_level: int):
 
 func die():
 	in_game = false
-	var stream = preload("res://sfx/Player/death_jack_01.wav")
+	var stream = preload("res://sfx/Wilhelm_Scream.ogg")
 	var volume = -5
 	set_music(stream, volume)
 	get_tree().change_scene("res://scenes/Game_Over.tscn")
