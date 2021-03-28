@@ -53,6 +53,7 @@ func die():
 	stream.loop = false
 	var volume = -5
 	set_music(stream, volume)
+	uploading = Uploading.NOT_YET
 
 func main_menu():
 	get_tree().change_scene("res://scenes/Main_Menu.gd")
