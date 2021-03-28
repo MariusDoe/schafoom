@@ -40,7 +40,7 @@ func create(rect: Rect2, texture: Texture, num_points: int, scale = Vector2(1, 1
 		vertices.resize(3)
 		for j in range(3):
 			var vertex_index = triangle_indices[i * 3 + j]
-			var vertex = points[vertex_index] * scale
+			var vertex = points[vertex_index]
 			vertices[j] = vertex
 		var triangle = Polygon2D.new()
 		triangle.polygon = vertices

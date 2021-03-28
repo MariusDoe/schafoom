@@ -11,7 +11,7 @@ const tilesets = [{
 }, {
 	# Middle
 	"left": preload("res://assets/Middle/Plattform/platform1.png"),
-	"middle": preload("res://assets/Middle/Plattform/platform2_alpha.png"),
+	"middle": preload("res://assets/Middle/Plattform/platform2.png"),
 	"right": preload("res://assets/Middle/Plattform/platform3.png"),
 	"tile_size": Vector2(70, 30),
 }, {
