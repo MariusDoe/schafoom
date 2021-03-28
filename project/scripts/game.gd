@@ -2,9 +2,9 @@ extends Node2D
 
 var platform_height = 40
 var background_move_factor = 0.5
-var dash_distance = 300
+var dash_distance = 400
 var dash_potato_count = 5
-var potato_probability = 0.1
+var potato_probability = 0.2
 
 var wall_height: float
 var platform_min_distance: Vector2
@@ -62,6 +62,7 @@ func _physics_process(delta) -> void:
 	remove_platforms()
 	move_background(delta)
 	move_walls(delta)
+	check_player_position()
 
 func spawn_platform(settings: Dictionary) -> Platform:
 	var position = settings["position"]
@@ -112,7 +113,7 @@ func spawn_player() -> Player:
 
 func get_current_velocity() -> Vector2:
 	var t = Globals.time
-	var velocity = 20 * pow(t, 0.4) + 100
+	var velocity = 40 * pow(t, 0.5) + 100
 	return Vector2(-velocity, 0)
 
 func set_platform_velocities() -> void:
@@ -320,3 +321,7 @@ func spawn_robot() -> Robot:
 	robot.connect("destroy", self, "_on_destroy")
 	$center.add_child(robot)
 	return robot
+
+func check_player_position() -> void:
+	if player.position.x < robot.position.x - robot.get_size().x / 2:
+		Globals.die()

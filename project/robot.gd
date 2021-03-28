@@ -8,13 +8,13 @@ export var jetpack = Vector2(0, -100)
 var player: Player
 
 var jetpack_enabled = false
+var touching_wall = false
 
 signal destroy(thing) 
 
 func _ready() -> void:
 	gravity = 800
 	start_walking()
-	start_jetpack()
 
 func start_jetpack() -> void:
 	jetpack_enabled = true
@@ -24,6 +24,7 @@ func start_jetpack() -> void:
 	$"Robot/body/upper-body/jetpack/Particles2D".emitting = true
 	
 func start_falling() -> void:
+	start_jetpack()
 	$"Robot/body/upper-body/jetpack/Particles2D".emitting = false
 	jetpack_enabled = false
 
@@ -34,6 +35,12 @@ func start_walking() -> void:
 	$CollisionShape2D.position = Vector2(0, 0)
 
 func follow_player():
+	if touching_wall:
+		if position.y < 0:
+			start_falling()
+		else:
+			start_jetpack()
+		return
 	if position.y > player.position.y:
 		start_jetpack()
 	else:
@@ -49,8 +56,6 @@ func _physics_process(delta) -> void:
 
 func move_robot(delta) -> void:
 	position += velocity * delta
-	
-	print(position)
 
 func apply_jetpack(delta) -> void:
 	velocity = jetpack
@@ -63,12 +68,14 @@ func _on_RobotPhysics_body_entered(body):
 		Globals.die()
 		return
 	if body is Wall:
-		if jetpack_enabled:
-			start_falling()
-		else:
-			start_jetpack()
+		touching_wall = true
 		return
 	emit_signal("destroy", body)
+
+func _on_RobotPhysics_body_exited(body):
+	if body is Wall:
+		touching_wall = false
+		return
 
 func get_size() -> Vector2:
 	return $CollisionShape2D.shape.extents * 2

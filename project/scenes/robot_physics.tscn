@@ -16,3 +16,4 @@ shape = SubResource( 1 )
 [node name="Robot" parent="." instance=ExtResource( 1 )]
 position = Vector2( -80, -100 )
 [connection signal="body_entered" from="." to="." method="_on_RobotPhysics_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_RobotPhysics_body_exited"]

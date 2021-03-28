@@ -105,7 +105,8 @@ func upload_time(name: String, score: float):
 
 	if response == null:
 		return false
-
+	
+	print(response)
 	var res = JSON.parse(response[3].get_string_from_utf8()).result
 	if res.has("position"):
 		var position = res["position"]
