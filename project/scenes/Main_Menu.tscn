@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/GUI/MainMenu/Background.png" type="Texture" id=1]
 [ext_resource path="res://assets/GUI/MainMenu/shadedDark47.png" type="Texture" id=2]
 [ext_resource path="res://assets/GUI/MainMenu/shadedDark42.png" type="Texture" id=3]
 [ext_resource path="res://scenes/Main_Menu.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Achievement.tscn" type="PackedScene" id=5]
 
 [node name="Main_Menu" type="Control"]
 anchor_right = 1.0
@@ -14,8 +15,10 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 2.79474
+margin_top = -11.7744
+margin_right = 1922.79
+margin_bottom = 1068.23
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,5 +43,7 @@ texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Achievement" parent="TextureRect" instance=ExtResource( 5 )]
 [connection signal="pressed" from="TextureRect/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="TextureRect/Exit" to="." method="_on_Exit_pressed"]
