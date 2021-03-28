@@ -233,14 +233,17 @@ func _on_destroy(thing) -> void:
 	if thing is Platform:
 		explode_platform(thing)
 
-func switch_level(direction: int) -> void:
+func get_new_level(direction: int) -> int:
 	var new_level = Globals.level
 	match direction:
 		Player.Direction.UP:
 			new_level += 1
 		Player.Direction.DOWN:
 			new_level -= 1
+	return new_level
 
+func switch_level(direction: int) -> void:
+	var new_level = get_new_level(direction)
 	Globals.dash(new_level)
 
 func _on_done_dashing() -> void:
@@ -273,10 +276,7 @@ func try_dash_down() -> void:
 func try_dash_up() -> void:
 	try_dash(Player.Direction.UP)
 
-func try_dash(direction: int) -> void:
-	if Globals.potato_count < dash_potato_count:
-		return
-	
+func get_distance(direction: int) -> float:
 	var screen_height = get_screen_size().y
 	var distance: float
 	match direction:
@@ -284,7 +284,25 @@ func try_dash(direction: int) -> void:
 			distance = -(-screen_height / 2 - player.position.y)
 		Player.Direction.DOWN:
 			distance = -screen_height / 2 - player.position.y
+		_:
+			return INF
+	return distance
+
+func can_dash(direction: int) -> bool:
+	if not Globals.is_level_ok(get_new_level(direction)):
+		return false
+	
+	if Globals.potato_count < dash_potato_count:
+		return false
+	
+	var distance = get_distance(direction)
 	if distance > dash_distance:
+		return false
+	
+	return true
+
+func try_dash(direction: int) -> void:
+	if not can_dash(direction):
 		return
 	
 	Globals.potato_count -= dash_potato_count

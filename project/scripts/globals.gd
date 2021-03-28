@@ -36,3 +36,6 @@ func quit():
 func submit_score(name: String):
 	# TODO
 	print("Submit score ", time, " as ", name, "!")
+
+func is_level_ok(level: int) -> bool:
+	return level >= 0 and level <= 2
