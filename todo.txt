@@ -1,9 +1,7 @@
 (Matvey)
-- potato collection (ui)
-- score (show in ui)
-
 - die screen (score submitting)
 - obstacles
+
 -jump effect
 
 
@@ -15,7 +13,6 @@
 - fix platform explosion texture bug
 - platform spawning improvements
 
-- player killing
 
 
 
