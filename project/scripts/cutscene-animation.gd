@@ -22,3 +22,10 @@ func _process(_delta):
 		
 	if walking:
 		robot_anim.play("walking")
+
+func _input(event: InputEvent):
+	if event.is_action_pressed("skip_cutscene"):
+		end()
+
+func end():
+	Globals.start_game()

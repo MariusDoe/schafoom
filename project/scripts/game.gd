@@ -241,8 +241,7 @@ func switch_level(direction: int) -> void:
 		Player.Direction.DOWN:
 			new_level -= 1
 
-	Globals.level = new_level
-	get_tree().change_scene("res://scenes/game.tscn")
+	Globals.dash(new_level)
 
 func _on_done_dashing() -> void:
 	switch_level(player.dash_direction)
@@ -266,7 +265,7 @@ func spawn_potatoes(platform: Platform) -> void:
 	potato.position = offset
 
 func _on_eaten_potato() -> void:
-	player.potato_count += 1
+	Globals.potato_count += 1
 
 func try_dash_down() -> void:
 	try_dash(Player.Direction.DOWN)
@@ -275,7 +274,7 @@ func try_dash_up() -> void:
 	try_dash(Player.Direction.UP)
 
 func try_dash(direction: int) -> void:
-	if player.potato_count < dash_potato_count:
+	if Globals.potato_count < dash_potato_count:
 		return
 	
 	var screen_height = get_screen_size().y
@@ -288,5 +287,5 @@ func try_dash(direction: int) -> void:
 	if distance > dash_distance:
 		return
 	
-	player.potato_count -= dash_potato_count
+	Globals.potato_count -= dash_potato_count
 	player.dash(direction)

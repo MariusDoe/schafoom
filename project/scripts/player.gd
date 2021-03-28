@@ -22,8 +22,6 @@ var pushed: bool
 
 var apparent_velocity: Vector2
 
-var potato_count = 0
-
 enum Direction {
 	UP,
 	DOWN,
