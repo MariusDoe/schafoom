@@ -48,7 +48,6 @@ func set_size(calced: Dictionary) -> void:
 	var rectangle = $shape.shape as RectangleShape2D
 	rectangle.extents = size / 2
 	$sprite.texture = texture
-	$sprite.scale = Vector2(tile_scale, tile_scale)
 
 static func calc(new_size: Vector2) -> Dictionary:
 	var tileset = get_tileset()
@@ -78,10 +77,9 @@ func create_texture() -> Texture:
 	var tile_size = tileset["tile_size"]
 	
 	var image = Image.new()
-	var size = Vector2(tile_count, 1) * tile_size
 	image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 	
-	var offset_add = Vector2(tile_size.x, 0)
+	var offset_add = Vector2(tile_size.x * tile_scale, 0)
 	var offset = Vector2(0, 0)
 	
 	blit_image(image, left_texture, offset)
@@ -98,7 +96,10 @@ func create_texture() -> Texture:
 func blit_image(dest: Image, src: StreamTexture, offset: Vector2) -> void:
 	var src_image = src.get_data()
 	var src_size = src.get_size()
-	var src_rect = Rect2(Vector2(0, 0), src_size)
+	var target_size = src_size * tile_scale
+	target_size = target_size.ceil()
+	src_image.resize(target_size.x, target_size.y, Image.INTERPOLATE_BILINEAR)
+	var src_rect = Rect2(Vector2(0, 0), target_size)
 	dest.blit_rect(src_image, src_rect, offset)
 
 func set_velocity(vel: Vector2) -> void:
