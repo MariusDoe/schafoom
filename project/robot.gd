@@ -24,7 +24,6 @@ func start_jetpack() -> void:
 	$"Robot/body/upper-body/jetpack/Particles2D".emitting = true
 	
 func start_falling() -> void:
-	start_jetpack()
 	$"Robot/body/upper-body/jetpack/Particles2D".emitting = false
 	jetpack_enabled = false
 
