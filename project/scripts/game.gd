@@ -17,26 +17,26 @@ var RobotScn = preload("res://scenes/robot_physics.tscn")
 
 var walls = [{
 	# Down
-	"top": "res://assets/Middle/Ground/Ground.png",
-	"bot": "res://assets/Down/Ground/Ground.png",
+	"top": preload("res://assets/Middle/Ground/Ground.png"),
+	"bot": preload("res://assets/Down/Ground/Ground.png"),
 	"height": 144
 }, {
 	# Middle
-	"top": "res://assets/Up/Ground/Ground.png",
-	"bot": "res://assets/Middle/Ground/Ground.png",
+	"top": preload("res://assets/Up/Ground/Ground.png"),
+	"bot": preload("res://assets/Middle/Ground/Ground.png"),
 	"height": 170
 }, {
 	# Up
-	"bot": "res://assets/Up/Ground/Ground.png",
+	"bot": preload("res://assets/Up/Ground/Ground.png"),
 	"height": 187
 }]
 
 var backgrounds = [{
-	"path": "res://scenes/Background_Down.tscn"
+	"path": preload("res://scenes/Background_Down.tscn")
 }, {
-	"path": "res://scenes/Background_Middle.tscn"
+	"path": preload("res://scenes/Background_Middle.tscn")
 }, {
-	"path": "res://scenes/Background_UP.tscn"
+	"path": preload("res://scenes/Background_UP.tscn")
 }]
 
 var top_wall: Wall
@@ -93,11 +93,11 @@ func spawn_walls() -> void:
 	var height = get_screen_size().y
 	if "top" in walls:
 		top_wall = spawn_wall(-height / 2 + wall_height / 2)
-		var texture = load(walls["top"])
+		var texture = walls["top"]
 		top_wall.set_texture(texture)
 	if "bot" in walls:
 		bot_wall = spawn_wall(+height / 2 - wall_height / 2)
-		var texture = load(walls["bot"])
+		var texture = walls["bot"]
 		bot_wall.set_texture(texture)
 
 func get_walls() -> Dictionary:
@@ -199,7 +199,7 @@ func get_background() -> Dictionary:
 
 func spawn_background() -> void:
 	var background_settings = get_background()
-	var scene = load(background_settings["path"])
+	var scene = background_settings["path"]
 	background = scene.instance()
 	add_child(background)
 

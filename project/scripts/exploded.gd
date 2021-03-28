@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 		if timer > lifetime:
 			queue_free()
 
-func create(rect: Rect2, texture: Texture, num_points: int):
+func create(rect: Rect2, texture: Texture, num_points: int, scale = Vector2(1, 1)):
 	position = rect.position
 	var points = PoolVector2Array()
 	points.resize(4 + num_points)
@@ -40,7 +40,7 @@ func create(rect: Rect2, texture: Texture, num_points: int):
 		vertices.resize(3)
 		for j in range(3):
 			var vertex_index = triangle_indices[i * 3 + j]
-			var vertex = points[vertex_index]
+			var vertex = points[vertex_index] * scale
 			vertices[j] = vertex
 		var triangle = Polygon2D.new()
 		triangle.polygon = vertices

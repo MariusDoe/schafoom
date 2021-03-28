@@ -4,21 +4,21 @@ class_name Platform
 
 const tilesets = [{
 	# Down
-	"left": "res://assets/Down/Plattform/platformIndustrial1.png",
-	"middle": "res://assets/Down/Plattform/platformIndustrial2.png",
-	"right": "res://assets/Down/Plattform/platformIndustrial3.png",
+	"left": preload("res://assets/Down/Plattform/platformIndustrial1.png"),
+	"middle": preload("res://assets/Down/Plattform/platformIndustrial2.png"),
+	"right": preload("res://assets/Down/Plattform/platformIndustrial3.png"),
 	"tile_size": Vector2(140, 140)
 }, {
 	# Middle
-	"left": "res://assets/Middle/Plattform/platform1.png",
-	"middle": "res://assets/Middle/Plattform/platform2.png",
-	"right": "res://assets/Middle/Plattform/platform3.png",
+	"left": preload("res://assets/Middle/Plattform/platform1.png"),
+	"middle": preload("res://assets/Middle/Plattform/platform2.png"),
+	"right": preload("res://assets/Middle/Plattform/platform3.png"),
 	"tile_size": Vector2(70, 30),
 }, {
 	# Up
-	"left": "res://assets/Up/Plattform/left.png",
-	"middle": "res://assets/Up/Plattform/middle.png",
-	"right": "res://assets/Up/Plattform/right.png",
+	"left": preload("res://assets/Up/Plattform/left.png"),
+	"middle": preload("res://assets/Up/Plattform/middle.png"),
+	"right": preload("res://assets/Up/Plattform/right.png"),
 	"tile_size": Vector2(42, 36),
 }]
 
@@ -71,24 +71,35 @@ static func get_tileset() -> Dictionary:
 
 func create_texture() -> Texture:
 	var tileset = get_tileset()
-	var texture = LargeTexture.new()
-	var left_texture = load(tileset["left"])
-	var middle_texture = load(tileset["middle"])
-	var right_texture = load(tileset["right"])
+	var texture = ImageTexture.new()
+	var left_texture = tileset["left"]
+	var middle_texture = tileset["middle"]
+	var right_texture = tileset["right"]
 	var tile_size = tileset["tile_size"]
-	texture.set_size(Vector2(tile_count, 1) * tile_size)
+	
+	var image = Image.new()
+	var size = Vector2(tile_count, 1) * tile_size
+	image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 	
 	var offset_add = Vector2(tile_size.x, 0)
 	var offset = Vector2(0, 0)
-	texture.add_piece(offset, left_texture)
+	
+	blit_image(image, left_texture, offset)
 	offset += offset_add
 	for i in range(tile_count - 2):
-		texture.add_piece(offset, middle_texture)
+		blit_image(image, middle_texture, offset)
 		offset += offset_add
-	texture.add_piece(offset, right_texture)
+	blit_image(image, right_texture, offset)
 	offset += offset_add
 	
+	texture.create_from_image(image)
 	return texture
+
+func blit_image(dest: Image, src: StreamTexture, offset: Vector2) -> void:
+	var src_image = src.get_data()
+	var src_size = src.get_size()
+	var src_rect = Rect2(Vector2(0, 0), src_size)
+	dest.blit_rect(src_image, src_rect, offset)
 
 func set_velocity(vel: Vector2) -> void:
 	velocity = vel
@@ -107,7 +118,7 @@ func handle_push_player() -> void:
 
 func explode() -> Node2D:
 	var exploded = ExplodedScn.instance()
-	var rect = Rect2(position - size / 2, size)
-	exploded.create(rect, $sprite.texture.duplicate(true), 10)
+	var rect = Rect2(position, size)
+	exploded.create(rect, $sprite.texture, 10, Vector2(tile_scale, tile_scale))
 	queue_free()
 	return exploded
