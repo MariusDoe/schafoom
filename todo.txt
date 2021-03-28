@@ -2,33 +2,24 @@
 - potato collection (ui)
 - score (show in ui)
 
-- main menu
 - die screen (score submitting)
-
-- sound effects, music
+- obstacles
+-jump effect
 
 
 (Luke)
-- sheep animation (cut scene)
-
+-cut scene sounds
+-jetpack fixing
 
 (Marius)
 - fix platform explosion texture bug
-
 - platform spawning improvements
 
-
-
-(To be done)
-- monster chasing
-- monster collision (platforms)
 - player killing
 
-- background improvements
-- obstacles
 
 
-
+_____________________________________
 optional
 - loot boxes
 - items
