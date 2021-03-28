@@ -11,7 +11,7 @@ const tilesets = [{
 }, {
 	# Middle
 	"left": preload("res://assets/Middle/Plattform/platform1.png"),
-	"middle": preload("res://assets/Middle/Plattform/platform2.png"),
+	"middle": preload("res://assets/Middle/Plattform/platform2_alpha.png"),
 	"right": preload("res://assets/Middle/Plattform/platform3.png"),
 	"tile_size": Vector2(70, 30),
 }, {
@@ -118,7 +118,7 @@ func handle_push_player() -> void:
 
 func explode() -> Node2D:
 	var exploded = ExplodedScn.instance()
-	var rect = Rect2(position, size)
+	var rect = Rect2(position - size / 2, size)
 	exploded.create(rect, $sprite.texture, 10, Vector2(tile_scale, tile_scale))
 	queue_free()
 	return exploded

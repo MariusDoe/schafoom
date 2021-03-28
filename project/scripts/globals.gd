@@ -27,25 +27,25 @@ func _physics_process(delta):
 		time += delta
 
 func start_cutscene():
+	get_tree().change_scene("res://scenes/Cutscene.tscn")
 	#var stream = preload("res://sfx/Music/Juhani Junkala [Chiptune Adventures] 1. Stage 1.wav")
 	#stream.loop_mode = AudioStreamSample.LOOP_FORWARD
 	#stream.loop_end = stream.get_length() * stream.mix_rate
 	#var volume = -15
 	#set_music(stream, volume)
 	music_player.stop()
-	get_tree().change_scene("res://scenes/Cutscene.tscn")
 
 func start_game():
 	level = 1
 	time = 0.0
 	potato_count = 0
+	get_tree().change_scene("res://scenes/game.tscn")
 	in_game = true
 	var stream = preload("res://sfx/Music/Juhani Junkala [Chiptune Adventures] 1. Stage 1.wav")
 	stream.loop_mode = AudioStreamSample.LOOP_FORWARD
 	stream.loop_end = stream.get_length() * stream.mix_rate
 	var volume = -15
 	set_music(stream, volume)
-	get_tree().change_scene("res://scenes/game.tscn")
 
 func dash(new_level: int):
 	level = new_level
@@ -53,18 +53,19 @@ func dash(new_level: int):
 
 func die():
 	in_game = false
+	get_tree().change_scene("res://scenes/Game_Over.tscn")
 	var stream = preload("res://sfx/Wilhelm_Scream.ogg")
+	stream.loop = false
 	var volume = -5
 	set_music(stream, volume)
-	get_tree().change_scene("res://scenes/Game_Over.tscn")
 
 func main_menu():
+	get_tree().change_scene("res://scenes/Main_Menu.gd")
 	var stream = preload("res://sfx/Music/Juhani Junkala [Chiptune Adventures] 2. Stage2.wav")
 	stream.loop_mode = AudioStreamSample.LOOP_FORWARD
 	stream.loop_end = stream.get_length() * stream.mix_rate
 	var volume = -15
 	set_music(stream, volume)
-	get_tree().change_scene("res://scenes/Main_Menu.gd")
 
 func quit():
 	get_tree().quit()
