@@ -70,6 +70,8 @@ func submit_score(name: String):
 		return
 	uploading = Uploading.IN_PROGRESS
 	var success = upload_time(name, time)
+	if success is GDScriptFunctionState:
+		success = yield(success, "completed")
 	if success:
 		uploading = Uploading.SUCCESS
 	else:
@@ -109,9 +111,9 @@ func upload_time(name: String, score: float):
 		var position = res["position"]
 		show_upload_status("Score submitted! - You scored position " \
 				+ str(position))
-		return false
+		return true
 	show_upload_status("Something went wrong...")
-	return true
+	return false
 
 func is_level_ok(level: int) -> bool:
 	return level >= 0 and level <= 2
