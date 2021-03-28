@@ -30,6 +30,9 @@ margin_left = 1023.99
 margin_top = 673.059
 margin_right = 1081.99
 margin_bottom = 697.059
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Send_Button" type="TextureButton" parent="Background"]
 margin_left = 1325.48

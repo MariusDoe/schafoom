@@ -17,22 +17,25 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Start" type="TextureButton" parent="TextureRect"]
-margin_left = 888.33
-margin_top = 624.077
-margin_right = 996.33
-margin_bottom = 672.077
+margin_left = 762.042
+margin_top = 590.48
+margin_right = 978.042
+margin_bottom = 686.48
 texture_normal = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Exit" type="TextureButton" parent="TextureRect"]
-margin_left = 1035.54
-margin_top = 603.98
-margin_right = 1115.54
-margin_bottom = 683.98
+margin_left = 1027.38
+margin_top = 574.121
+margin_right = 1147.38
+margin_bottom = 694.121
 texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

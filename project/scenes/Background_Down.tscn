@@ -1,15 +1,75 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Background_UP.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Down/Background/Background.png" type="Texture" id=2]
+[ext_resource path="res://assets/Down/Background/platformIndustrial_026.png" type="Texture" id=3]
+[ext_resource path="res://assets/Down/Background/platformIndustrial_027.png" type="Texture" id=4]
+[ext_resource path="res://assets/Down/Background/platformIndustrial_054.png" type="Texture" id=5]
+[ext_resource path="res://assets/Down/Background/platformIndustrial_106.png" type="Texture" id=6]
+[ext_resource path="res://assets/Down/Background/platformIndustrial_111.png" type="Texture" id=7]
 
 [node name="Background_Down" instance=ExtResource( 1 )]
 
 [node name="TextureRect" parent="ParallaxBackground/ParallaxLayer" index="0"]
 texture = ExtResource( 2 )
 
-[node name="ParallaxLayer2" parent="ParallaxBackground" index="1"]
+[node name="ParallaxLayer5" parent="ParallaxBackground" index="1"]
+visible = false
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer5" index="0"]
+texture = null
+
+[node name="ParallaxLayer2" parent="ParallaxBackground" index="2"]
 visible = false
 
 [node name="TextureRect" parent="ParallaxBackground/ParallaxLayer2" index="0"]
 texture = null
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer3" index="0"]
+margin_left = 200.184
+margin_top = 130.687
+margin_right = 340.184
+margin_bottom = 270.687
+texture = ExtResource( 3 )
+
+[node name="ParallaxLayer4" parent="ParallaxBackground" index="4"]
+visible = true
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer4" index="0"]
+margin_left = 1165.57
+margin_top = 132.524
+margin_right = 1305.57
+margin_bottom = 272.524
+texture = ExtResource( 4 )
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer7" index="0"]
+margin_left = 1740.09
+margin_top = 141.448
+margin_right = 1880.09
+margin_bottom = 281.448
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer6" index="0"]
+margin_left = 279.88
+margin_top = 806.31
+margin_right = 419.88
+margin_bottom = 946.31
+texture = ExtResource( 6 )
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer8" index="0"]
+margin_left = 479.742
+margin_top = 338.206
+margin_right = 619.742
+margin_bottom = 478.206
+texture = ExtResource( 7 )
+
+[node name="ParallaxLayer9" parent="ParallaxBackground" index="8"]
+visible = true
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer9" index="0"]
+margin_left = 1498.94
+margin_top = 571.678
+margin_right = 1638.94
+margin_bottom = 711.678
+texture = ExtResource( 7 )
