@@ -1,8 +1,7 @@
 extends Area2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+class_name Robot
+
 var velocity = Vector2(0, 0)
 export var jetpack = Vector2(0, -100)
 
@@ -12,12 +11,10 @@ var jetpack_enabled = false
 
 signal destroy(thing) 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	gravity = 800
 	start_walking()
 	start_jetpack()
-	start_falling()
 
 func start_jetpack() -> void:
 	jetpack_enabled = true
@@ -37,7 +34,7 @@ func start_walking() -> void:
 	$CollisionShape2D.position = Vector2(0, 0)
 
 func follow_player():
-	if position.y > 300:
+	if position.y > player.position.y:
 		start_jetpack()
 	else:
 		start_falling()
@@ -63,6 +60,15 @@ func apply_gravity(delta) -> void:
 
 func _on_RobotPhysics_body_entered(body):
 	if body is Player:
-		#Globals.die()
+		Globals.die()
+		return
+	if body is Wall:
+		if jetpack_enabled:
+			start_falling()
+		else:
+			start_jetpack()
 		return
 	emit_signal("destroy", body)
+
+func get_size() -> Vector2:
+	return $CollisionShape2D.shape.extents * 2

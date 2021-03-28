@@ -7,7 +7,7 @@ var in_game = false
 
 const GAME_NAME = "schafoom"
 
-var uploading = UPLOADING.NOT_YET
+var uploading = Uploading.NOT_YET
 
 enum Uploading {
 	NOT_YET,

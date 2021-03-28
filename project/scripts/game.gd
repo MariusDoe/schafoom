@@ -13,6 +13,7 @@ var PotatoScn = preload("res://scenes/Potato.tscn")
 var WallScn = preload("res://scenes/wall.tscn")
 var PlatformScn = preload("res://scenes/platform.tscn")
 var PlayerScn = preload("res://scenes/player.tscn")
+var RobotScn = preload("res://scenes/robot_physics.tscn")
 
 var walls = [{
 	# Down
@@ -41,6 +42,7 @@ var backgrounds = [{
 var top_wall: Wall
 var bot_wall: Wall
 var player: Player
+var robot: Robot
 var platforms = []
 var background: Node2D
 
@@ -50,6 +52,7 @@ func _ready() -> void:
 	spawn_walls()
 	spawn_background()
 	player = spawn_player()
+	robot = spawn_robot()
 	platform_min_distance = player.get_size()
 
 func _physics_process(delta) -> void:
@@ -307,3 +310,13 @@ func try_dash(direction: int) -> void:
 	
 	Globals.potato_count -= dash_potato_count
 	player.dash(direction)
+
+func spawn_robot() -> Robot:
+	var robot = RobotScn.instance()
+	var pos_x = - get_screen_size().x / 2 + robot.get_size().x
+	var pos_y = 0
+	robot.position = Vector2(pos_x, pos_y)
+	robot.player = player
+	robot.connect("destroy", self, "_on_destroy")
+	$center.add_child(robot)
+	return robot
