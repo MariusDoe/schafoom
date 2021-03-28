@@ -53,6 +53,13 @@ func jump_trigger() -> void:
 		return
 	velocity = jump_velocity
 	jump_cooldown = jump_max_time
+	var music_player: AudioStreamPlayer = AudioStreamPlayer.new()
+	add_child(music_player)
+	var stream = preload("res://sfx/Player/bodyimpact_jack_01.wav")
+	var volume = -5
+	music_player.stream = stream
+	music_player.volume_db = volume
+	music_player.play()
 
 func jump_release() -> void:
 	jump_cooldown = 0.0
