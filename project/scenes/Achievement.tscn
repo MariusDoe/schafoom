@@ -12,6 +12,7 @@ font_data = ExtResource( 1 )
 [sub_resource type="Animation" id=2]
 resource_name = "Achievement"
 length = 3.0
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
 tracks/0/interp = 1
