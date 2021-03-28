@@ -1,15 +1,71 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Background_UP.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Middle/Background/Background.png" type="Texture" id=2]
+[ext_resource path="res://assets/Middle/Background/chain.png" type="Texture" id=3]
+[ext_resource path="res://assets/Middle/Background/torch.png" type="Texture" id=4]
+[ext_resource path="res://assets/Middle/Window/WindowS.png" type="Texture" id=5]
+[ext_resource path="res://assets/Middle/Window/WindowL.png" type="Texture" id=6]
 
 [node name="Background_Middle" instance=ExtResource( 1 )]
 
 [node name="TextureRect" parent="ParallaxBackground/ParallaxLayer" index="0"]
 texture = ExtResource( 2 )
 
-[node name="ParallaxLayer2" parent="ParallaxBackground" index="1"]
+[node name="ParallaxLayer5" parent="ParallaxBackground" index="1"]
+motion_scale = Vector2( 1, 1 )
+motion_mirroring = Vector2( 1920, 1080 )
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer5" index="0"]
+margin_left = 1447.36
+margin_top = 263.702
+margin_right = 1605.36
+margin_bottom = 692.702
+texture = ExtResource( 6 )
+
+[node name="ParallaxLayer2" parent="ParallaxBackground" index="2"]
 visible = false
 
 [node name="TextureRect" parent="ParallaxBackground/ParallaxLayer2" index="0"]
-texture = null
+margin_left = 543.672
+margin_top = -3.77548
+margin_right = 671.672
+margin_bottom = 124.225
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer3" index="0"]
+margin_left = 1227.92
+margin_top = 841.353
+margin_right = 1297.92
+margin_bottom = 911.353
+texture = ExtResource( 4 )
+
+[node name="ParallaxLayer4" parent="ParallaxBackground" index="4"]
+visible = true
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer4" index="0"]
+margin_left = 453.06
+margin_top = 170.0
+margin_right = 581.06
+margin_bottom = 298.0
+texture = ExtResource( 3 )
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer7" index="0"]
+margin_left = 185.79
+margin_top = 380.57
+margin_right = 343.79
+margin_bottom = 809.57
+texture = ExtResource( 6 )
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer6" index="0"]
+margin_left = 892.991
+margin_top = 365.587
+margin_right = 962.991
+margin_bottom = 435.587
+texture = ExtResource( 5 )
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer8" index="0"]
+margin_left = 647.599
+margin_top = 622.401
+margin_right = 717.599
+margin_bottom = 692.401
+texture = ExtResource( 5 )

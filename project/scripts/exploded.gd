@@ -2,7 +2,6 @@ extends Node2D
 
 var start_velocity_min = 1.0
 var start_velocity_max = 1000.0
-var max_spin = deg2rad(180)
 var gravity = Vector2(0, 500.0)
 var lifetime = 5.0
 
@@ -19,16 +18,17 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 
 func create(rect: Rect2, texture: Texture, num_points: int):
+	position = rect.position
 	var points = PoolVector2Array()
 	points.resize(4 + num_points)
-	points[0] = rect.position
-	points[1] = rect.position + Vector2(rect.size.x, 0)
-	points[2] = rect.position + Vector2(0, rect.size.y)
-	points[3] = rect.position + rect.size
+	points[0] = Vector2(0, 0)
+	points[1] = Vector2(rect.size.x, 0)
+	points[2] = Vector2(0, rect.size.y)
+	points[3] = rect.size
 	
 	for i in range(num_points):
-		var x = rand_range(rect.position.x, rect.position.x + rect.size.x)
-		var y = rand_range(rect.position.y, rect.position.y + rect.size.y)
+		var x = rand_range(0, rect.size.x)
+		var y = rand_range(0, rect.size.y)
 		var point = Vector2(x, y)
 		points[4 + i] = point
 	

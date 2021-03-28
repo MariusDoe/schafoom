@@ -1,9 +1,12 @@
 extends Node2D
 
 var platform_height = 40
-var wall_height: float
 var background_move_factor = 0.5
+var dash_distance = 300
+var dash_potato_count = 5
+var potato_probability = 0.1
 
+var wall_height: float
 var platform_min_distance: Vector2
 
 var PotatoScn = preload("res://scenes/Potato.tscn")
@@ -53,18 +56,18 @@ func _physics_process(delta) -> void:
 	set_platform_velocities()
 	set_player_apparent_velocity()
 	spawn_platforms()
+	remove_platforms()
 	move_background(delta)
 	move_walls(delta)
 
-func spawn_platform(pos: Vector2, width: float) -> Platform:
+func spawn_platform(settings: Dictionary) -> Platform:
+	var position = settings["position"]
+	var calced = settings["calced"]
 	var platform = PlatformScn.instance()
-	platform.set_size(Vector2(width, platform_height))
-	platform.position = pos
+	platform.set_size(calced)
+	platform.position = position
 	$center.add_child(platform)
-	var potato = spawn_potato(platform)
-	var offset_y = (platform_height + potato.get_size().y) / 2
-	var offset = Vector2(0, -offset_y)
-	potato.position = offset
+	spawn_potatoes(platform)
 	return platform
 
 func spawn_wall(y: float) -> Wall:
@@ -105,7 +108,9 @@ func spawn_player() -> Player:
 	return player
 
 func get_current_velocity() -> Vector2:
-	return Vector2(-100, 0)
+	var t = Globals.time
+	var velocity = 20 * pow(t, 0.4) + 100
+	return Vector2(-velocity, 0)
 
 func set_platform_velocities() -> void:
 	var velocity = get_current_velocity()
@@ -129,40 +134,50 @@ func is_platform_rect_ok(rect: Rect2) -> bool:
 			return false
 	return true
 
-func create_new_platform_rect() -> Rect2:
+func is_platform_settings_ok(settings: Dictionary) -> bool:
+	var pos = settings["position"]
+	var size = settings["calced"]["size"]
+	var rect = Rect2(pos - size / 2, size)
+	return is_platform_rect_ok(rect)
+
+func create_platform_settings() -> Dictionary:
 	var screen_size = get_screen_size()
 	var width = get_platform_width()
+	var size = Vector2(width, platform_height)
+	var calced = Platform.calc(size)
+	var calced_size = calced["size"]
 	var spread = (screen_size.y - platform_height) / 2 - wall_height
 	var spread_top = spread - platform_min_distance.y
 	var spread_bot = spread
 	var y = rand_range(-spread_top, spread_bot)
-	var x = (screen_size.x + width) / 2
+	var x = (screen_size.x + calced_size.x) / 2
 	var pos = Vector2(x, y)
-	var size = Vector2(width, platform_height)
-	var rect = Rect2(pos, size)
-	return rect
+	return {
+		"position": pos,
+		"calced": calced
+	}
 
-func adjust_platform_rect(rect: Rect2) -> Rect2:
-	var old_size = rect.size
-	var temp_platform = PlatformScn.instance()
-	rect.size = temp_platform.calc_size(rect.size)
-	temp_platform.queue_free()
-	rect.position.x += (old_size.x - rect.size.x) / 2
-	return rect
-
-func create_new_platform() -> void:
+func try_spawn_platform() -> void:
 	for try in range(5):
-		var rect = create_new_platform_rect()
-		var test_rect = adjust_platform_rect(rect)
-		if not is_platform_rect_ok(test_rect):
+		var settings = create_platform_settings()
+		if not is_platform_settings_ok(settings):
 			continue
-		var platform = spawn_platform(test_rect.position, rect.size.x)
+		var platform = spawn_platform(settings)
 		platforms.push_back(platform)
 		return
 
 func spawn_platforms() -> void:
 	if randf() < 0.01:
-		create_new_platform()
+		try_spawn_platform()
+
+func remove_platforms() -> void:
+	var left_border = -get_screen_size().x / 2
+	for i in range(platforms.size() - 1, -1, -1):
+		var platform = platforms[i]
+		var width = platform.get_rect().size.x
+		if platform.position.x + width / 2 < left_border:
+			platforms.remove(i)
+			platform.queue_free()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
@@ -171,9 +186,9 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("jump"):
 			player.jump_release()
 		if event.is_action_pressed("dash_down"):
-			player.dash_down()
+			try_dash_down()
 		if event.is_action_pressed("dash_up"):
-			player.dash_up()
+			try_dash_up()
 
 func get_background() -> Dictionary:
 	return backgrounds[Globals.level]
@@ -218,16 +233,18 @@ func _on_destroy(thing) -> void:
 	if thing is Platform:
 		explode_platform(thing)
 
-func switch_level(direction: int) -> void:
+func get_new_level(direction: int) -> int:
 	var new_level = Globals.level
 	match direction:
 		Player.Direction.UP:
 			new_level += 1
 		Player.Direction.DOWN:
 			new_level -= 1
+	return new_level
 
-	Globals.level = new_level
-	get_tree().change_scene("res://scenes/game.tscn")
+func switch_level(direction: int) -> void:
+	var new_level = get_new_level(direction)
+	Globals.dash(new_level)
 
 func _on_done_dashing() -> void:
 	switch_level(player.dash_direction)
@@ -235,4 +252,58 @@ func _on_done_dashing() -> void:
 func spawn_potato(platform: Platform) -> Potato:
 	var potato = PotatoScn.instance()
 	platform.add_child(potato)
+	potato.connect("eaten_potato", self, "_on_eaten_potato")
 	return potato
+
+func spawn_potatoes(platform: Platform) -> void:
+	if randf() >= potato_probability:
+		return
+	var potato = spawn_potato(platform)
+	var potato_size = potato.get_size()
+	var platform_width = platform.get_rect().size.x
+	var spread = (platform_width - potato_size.x) / 2
+	var offset_x = rand_range(-spread, spread)
+	var offset_y = (platform_height + potato_size.y) / 2
+	var offset = Vector2(offset_x, -offset_y)
+	potato.position = offset
+
+func _on_eaten_potato() -> void:
+	Globals.potato_count += 1
+
+func try_dash_down() -> void:
+	try_dash(Player.Direction.DOWN)
+
+func try_dash_up() -> void:
+	try_dash(Player.Direction.UP)
+
+func get_distance(direction: int) -> float:
+	var screen_height = get_screen_size().y
+	var distance: float
+	match direction:
+		Player.Direction.UP:
+			distance = -(-screen_height / 2 - player.position.y)
+		Player.Direction.DOWN:
+			distance = -screen_height / 2 - player.position.y
+		_:
+			return INF
+	return distance
+
+func can_dash(direction: int) -> bool:
+	if not Globals.is_level_ok(get_new_level(direction)):
+		return false
+	
+	if Globals.potato_count < dash_potato_count:
+		return false
+	
+	var distance = get_distance(direction)
+	if distance > dash_distance:
+		return false
+	
+	return true
+
+func try_dash(direction: int) -> void:
+	if not can_dash(direction):
+		return
+	
+	Globals.potato_count -= dash_potato_count
+	player.dash(direction)

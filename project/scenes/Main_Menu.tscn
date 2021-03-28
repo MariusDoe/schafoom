@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/GUI/MainMenu/Background.png" type="Texture" id=1]
 [ext_resource path="res://assets/GUI/MainMenu/shadedDark47.png" type="Texture" id=2]
 [ext_resource path="res://assets/GUI/MainMenu/shadedDark42.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Main_Menu.gd" type="Script" id=4]
 
 [node name="Main_Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -15,20 +17,28 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect"]
-margin_left = 627.441
-margin_top = 627.441
-margin_right = 735.441
-margin_bottom = 675.441
+[node name="Start" type="TextureButton" parent="TextureRect"]
+margin_left = 762.042
+margin_top = 590.48
+margin_right = 978.042
+margin_bottom = 686.48
 texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureButton2" type="TextureButton" parent="TextureRect"]
-margin_left = 1096.13
-margin_top = 604.762
-margin_right = 1176.13
-margin_bottom = 684.762
+[node name="Exit" type="TextureButton" parent="TextureRect"]
+margin_left = 1027.38
+margin_top = 574.121
+margin_right = 1147.38
+margin_bottom = 694.121
 texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="TextureRect/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="TextureRect/Exit" to="." method="_on_Exit_pressed"]

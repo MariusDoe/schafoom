@@ -19,19 +19,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Background"]
+[node name="Score" type="Label" parent="Background"]
 margin_left = 1016.69
 margin_top = 530.986
 margin_right = 1056.69
 margin_bottom = 544.986
 
-[node name="LineEdit" type="LineEdit" parent="Background"]
+[node name="Name" type="LineEdit" parent="Background"]
 margin_left = 1023.99
 margin_top = 673.059
 margin_right = 1081.99
 margin_bottom = 697.059
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureButton" type="TextureButton" parent="Background"]
+[node name="Send_Button" type="TextureButton" parent="Background"]
 margin_left = 1325.48
 margin_top = 644.485
 margin_right = 1405.48
@@ -41,7 +44,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton2" type="TextureButton" parent="Background"]
+[node name="Try_Again" type="TextureButton" parent="Background"]
 margin_left = 1177.85
 margin_top = 784.176
 margin_right = 1257.85

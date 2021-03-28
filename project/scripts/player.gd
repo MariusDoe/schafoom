@@ -11,6 +11,7 @@ var velocity = Vector2(0, 0)
 var jump_cooldown = 0.0
 
 var dash_duration = 1.0
+var dash_time_scale = 0.5
 
 var dash_depth = 500
 var dash_down_prejump_height = 40
@@ -102,21 +103,17 @@ func get_dash_curve() -> Curve:
 			return dash_curve_down
 	return null
 
-func dash_up() -> void:
-	start_dash(Direction.UP)
-
-func dash_down() -> void:
-	start_dash(Direction.DOWN)
-
-func start_dash(direction: int) -> void:
+func dash(direction: int) -> void:
 	dash_direction = direction
 	dash_start_y = position.y
 	dash_time = 0.0
 	dashing = true
+	Engine.time_scale = dash_time_scale
 
 func perform_dash(delta: float) -> void:
 	if dash_time >= dash_duration:
 		dashing = false
+		Engine.time_scale = 1.0
 		emit_signal("done_dashing")
 		return
 	var curve = get_dash_curve()
