@@ -465,7 +465,7 @@ tracks/41/loop_wrap = true
 tracks/41/imported = false
 tracks/41/enabled = true
 tracks/41/keys = {
-"points": PoolRealArray( 177.003, -0.25, 0, 0.25, 0, 177.003, -0.25, 0, 0.25, 0, 163.518, -0.25, 0, 0.25, 0, 163.518, -0.25, 0, 0.25, 0, 166, -0.25, 0, 0.25, 0, 480, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 174, -0.25, 0, 0.25, 0, 174, -0.25, 0, 0.25, 0, 166, -0.25, 0, 0.25, 0, 166, -0.25, 0, 0.25, 0, 166, -0.25, 0, 0.25, 0, 480, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 8.5, 10, 11.9, 12, 14.9 )
 }
 tracks/42/type = "bezier"
@@ -475,7 +475,7 @@ tracks/42/loop_wrap = true
 tracks/42/imported = false
 tracks/42/enabled = true
 tracks/42/keys = {
-"points": PoolRealArray( 377.4, -0.25, 0, 0.25, 0, 377.4, -0.25, 0, 0.25, 0, 293.495, -0.25, 0, 0.25, 0, 293.495, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0 ),
+"points": PoolRealArray( 198, -0.25, 0, 0.25, 0, 198, -0.25, 0, 0.25, 0, 192, -0.25, 0, 0.25, 0, 192, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 8.5, 10, 11.9, 12, 14.9 )
 }
 tracks/43/type = "bezier"
@@ -605,6 +605,7 @@ tracks/53/keys = {
 
 [node name="Cutscene" type="Node2D"]
 script = ExtResource( 2 )
+spawn_robot = true
 
 [node name="Monitor1" type="Polygon2D" parent="."]
 position = Vector2( 10, 0 )
@@ -622,11 +623,13 @@ color = Color( 0.12549, 0.133333, 0.141176, 1 )
 polygon = PoolVector2Array( 70, 376, 614, 376, 614, 408, 70, 408 )
 
 [node name="Tile1" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
-position = Vector2( 14, 0 )
+position = Vector2( 454, 184 )
+scale = Vector2( 0.6, 0.6 )
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
 polygon = PoolVector2Array( 104, 128, 96, 136, 96, 216, 104, 224, 216, 224, 224, 216, 224, 136, 216, 128 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Monitor1/MonitorContent/Zoom/Tile1"]
+visible = false
 margin_left = 128.0
 margin_top = 168.0
 margin_right = 224.0
@@ -637,12 +640,14 @@ __meta__ = {
 }
 
 [node name="Tile2" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
-position = Vector2( 334, 168 )
+position = Vector2( 550, 215 )
+scale = Vector2( 0.6, 0.6 )
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
 offset = Vector2( -288, -168 )
 polygon = PoolVector2Array( 224, 136, 224, 216, 232, 224, 344, 224, 352, 216, 352, 136, 342, 128, 232, 128 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Monitor1/MonitorContent/Zoom/Tile2"]
+visible = false
 margin_left = -32.0
 margin_right = 48.0
 margin_bottom = 40.0
@@ -652,7 +657,8 @@ __meta__ = {
 }
 
 [node name="Tile3" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
-position = Vector2( -10, 0 )
+position = Vector2( 250, 48 )
+scale = Vector2( 0.6, 0.6 )
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
 polygon = PoolVector2Array( 438, 136, 438, 216, 446, 224, 558, 224, 566, 216, 566, 136, 558, 128, 446, 128 )
 
@@ -663,6 +669,7 @@ z_index = 5
 texture = ExtResource( 3 )
 
 [node name="Tile4" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+visible = false
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
 polygon = PoolVector2Array( 110, 256, 110, 336, 118, 344, 230, 344, 238, 336, 238, 256, 230, 248, 118, 248 )
 
@@ -677,6 +684,7 @@ __meta__ = {
 }
 
 [node name="Tile5" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+visible = false
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
 polygon = PoolVector2Array( 270, 256, 278, 248, 390, 248, 398, 256, 398, 336, 390, 344, 278, 344, 270, 336 )
 
@@ -691,6 +699,7 @@ __meta__ = {
 }
 
 [node name="Tile6" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom"]
+visible = false
 color = Color( 0.133333, 0.133333, 0.133333, 1 )
 polygon = PoolVector2Array( 430, 256, 438, 248, 550, 248, 558, 256, 558, 336, 550, 344, 438, 344, 430, 336 )
 
@@ -705,7 +714,6 @@ __meta__ = {
 }
 
 [node name="SharedContent" type="Node2D" parent="Monitor1/MonitorContent/Zoom"]
-visible = false
 position = Vector2( 86, 112 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Monitor1/MonitorContent/Zoom/SharedContent"]
@@ -713,8 +721,7 @@ color = Color( 0.223529, 0.223529, 0.223529, 1 )
 polygon = PoolVector2Array( -8, -8, 416, -8, 416, 256, -8, 256, -8, -8 )
 
 [node name="Robot" parent="Monitor1/MonitorContent/Zoom" instance=ExtResource( 1 )]
-position = Vector2( 177.003, 377.4 )
-scale = Vector2( 1, 1 )
+position = Vector2( 166, 192 )
 z_index = 10
 
 [node name="WindowFrame" type="Polygon2D" parent="Monitor1"]
@@ -728,7 +735,6 @@ color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( 56, 80, 56, 432, 72, 448, 320, 448, 320, 504, 248, 512, 440, 512, 368, 504, 368, 448, 616, 448, 632, 432, 632, 80, 616, 64, 72, 64 )
 
 [node name="WindowFrame2" type="Polygon2D" parent="Monitor2"]
-visible = false
 color = Color( 0.211765, 0.211765, 0.211765, 1 )
 polygon = PoolVector2Array( 72, 80, 72, 96, 616, 96, 616, 80 )
 
@@ -762,22 +768,24 @@ polygon = PoolVector2Array( 112, 160, 112, 304, 352, 304, 352, 160 )
 position = Vector2( 216, 232 )
 
 [node name="Eye1" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
-position = Vector2( -14.4388, 0 )
+position = Vector2( 18.0612, 7 )
+rotation = 0.436332
 color = Color( 0.345098, 0.345098, 0.345098, 1 )
 polygon = PoolVector2Array( -48, -40, -48, -24, -8, -32, -8, -40 )
 
 [node name="Eye2" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
-position = Vector2( 24, 0 )
+position = Vector2( 92.9233, 7 )
+rotation = -0.523599
 color = Color( 0.345098, 0.345098, 0.345098, 1 )
 polygon = PoolVector2Array( 8, -40, 8, -32, 48, -24, 48, -40 )
 
 [node name="HandLeft" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
-position = Vector2( -22.4388, 16.6 )
+position = Vector2( 128.561, 16 )
 color = Color( 0.654902, 0.294118, 0.294118, 1 )
 polygon = PoolVector2Array( -40, 0, -40, 24, 3, 24, 3, 22, -16, 22, -16, 19, -2, 19, -2, 16, -16, 16, -16, 12, -3.125, 12.125, -3.00586, 10.1873, -15.75, 9.75, -15.625, 7.375, -3.375, 7.25, -3.375, 5.5, -15.75, 5.125, -15.625, 0.375, -23.375, 0, -10.875, -5.5, -12.375, -6.875, -28.625, 0.25 )
 
 [node name="HandRight" type="Polygon2D" parent="Monitor2/MyTube/Oponent"]
-position = Vector2( 41.7866, 16.6 )
+position = Vector2( 77, 47.3 )
 scale = Vector2( -1, 1 )
 color = Color( 0.243137, 0.52549, 0.176471, 1 )
 polygon = PoolVector2Array( -40, 0, -40, 24, 3, 24, 3, 22, -16, 22, -16, 19, -2, 19, -2, 16, -16, 16, -16, 12, -3.125, 12.125, -3.00586, 10.1873, -15.75, 9.75, -15.625, 7.375, -3.375, 7.25, -3.375, 5.5, -15.75, 5.125, -15.625, 0.375, -23.375, 0, -10.875, -5.5, -12.375, -6.875, -28.625, 0.25 )
@@ -817,9 +825,8 @@ position = Vector2( 502, 183 )
 texture = ExtResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 500, 300 )
+position = Vector2( 750, 300 )
 current = true
-zoom = Vector2( 0.5, 0.5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "cutscene"
@@ -839,7 +846,7 @@ texture = ExtResource( 11 )
 
 [node name="mosaic-2790339_1280" type="Sprite" parent="."]
 modulate = Color( 0.247059, 0.247059, 0.247059, 1 )
-position = Vector2( 752, 376 )
+position = Vector2( 744, 344 )
 scale = Vector2( 1.68437, 1.68437 )
 z_index = -20
 texture = ExtResource( 12 )
