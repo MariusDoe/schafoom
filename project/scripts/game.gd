@@ -178,7 +178,6 @@ func remove_platforms() -> void:
 		if platform.position.x + width / 2 < left_border:
 			platforms.remove(i)
 			platform.queue_free()
-			print("removed")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
