@@ -5,6 +5,7 @@ var background_move_factor = 0.5
 var dash_distance = 400
 var dash_potato_count = 5
 var potato_probability = 0.2
+var platform_spawn_distance = 200
 
 var wall_height: float
 var platform_min_distance: Vector2
@@ -58,7 +59,7 @@ func _ready() -> void:
 func _physics_process(delta) -> void:
 	set_platform_velocities()
 	set_player_apparent_velocity()
-	spawn_platforms()
+	spawn_platforms(delta)
 	remove_platforms()
 	move_background(delta)
 	move_walls(delta)
@@ -170,9 +171,14 @@ func try_spawn_platform() -> void:
 		platforms.push_back(platform)
 		return
 
-func spawn_platforms() -> void:
-	if randf() < 0.01:
+var platform_spawn_acc = 0.0
+
+func spawn_platforms(delta: float) -> void:
+	var velocity = -get_current_velocity().x
+	platform_spawn_acc += delta * velocity
+	while platform_spawn_acc > platform_spawn_distance:
 		try_spawn_platform()
+		platform_spawn_acc -= platform_spawn_distance
 
 func remove_platforms() -> void:
 	var left_border = -get_screen_size().x / 2
